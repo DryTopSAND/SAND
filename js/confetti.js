@@ -1,17 +1,27 @@
 // Confetti code via https://codepen.io/linrock/pen/Amdhr
 (function() {
-  var COLORS, Confetti, NUM_CONFETTI, PI_2, canvas, confetti, context,
-      drawCircle, i, range, resizeWindow, xpos;
+  var COLORS;
+  var Confetti;
+  var NUM_CONFETTI;
+  var PI_2;
+  var canvas;
+  var confetti;
+  var context;
+  var drawCircle;
+  var i; // eslint-disable-line
+  var range;
+  var resizeWindow;
+  var xpos;
 
   NUM_CONFETTI = 75;
   COLORS = [
-    [85, 71, 106], [174, 61, 99], [219, 56, 83], [244, 92, 68], [248, 182, 70]
+    [85, 71, 106], [174, 61, 99], [219, 56, 83], [244, 92, 68], [248, 182, 70],
   ];
 
   PI_2 = 2 * Math.PI;
 
-  canvas = document.getElementById("world");
-  context = canvas.getContext("2d");
+  canvas = document.getElementById('world');
+  context = canvas.getContext('2d');
 
   window.w = 0;
   window.h = 0;
@@ -58,7 +68,7 @@
   Confetti = (function() {
     function Confetti() {
       this.style = COLORS[~~range(0, 5)];
-      this.rgb = "rgba(" + this.style[0] + "," + this.style[1] + "," + this.style[2];
+      this.rgb = 'rgba(' + this.style[0] + ',' + this.style[1] + ',' + this.style[2];
       this.r = ~~range(2, 6);
       this.r2 = 2 * this.r;
       this.replace();
@@ -77,6 +87,7 @@
 
     Confetti.prototype.draw = function() {
       var ref;
+
       this.x += this.vx;
       this.y += this.vy;
       this.opacity += this.dop;
@@ -90,15 +101,17 @@
       if (!((0 < (ref = this.x) && ref < this.xmax))) {
         this.x = (this.x + this.xmax) % this.xmax;
       }
-      return drawCircle(~~this.x, ~~this.y, this.r, this.rgb + "," + this.opacity + ")");
+      return drawCircle(~~this.x, ~~this.y, this.r, this.rgb + ',' + this.opacity + ')');
     };
 
     return Confetti;
-
   })();
 
   confetti = (function() {
-    var j, ref, results;
+    var j;
+    var ref;
+    var results;
+
     results = [];
     for (i = j = 1, ref = NUM_CONFETTI; 1 <= ref ? j <= ref : j >= ref; i = 1 <= ref ? ++j : --j) {
       results.push(new Confetti);
@@ -107,7 +120,11 @@
   })();
 
   window.step = function() {
-    var c, j, len, results;
+    var c;
+    var j;
+    var len;
+    var results;
+
     requestAnimationFrame(step);
     context.clearRect(0, 0, w, h);
     results = [];
@@ -119,5 +136,4 @@
   };
 
   step();
-
 }).call(this);

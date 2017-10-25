@@ -7,17 +7,17 @@ $.get(
       var code = '';
 
       data.forEach(function(rank) {
-        //todo order by id?
+        // todo order by id?
         code = code +
-            "<div class='col-md-4'>" +
-            "<p>" +
-            "<img src='" + rank.icon + "'> " +
+            '<div class=\'col-md-4\'>' +
+            '<p>' +
+            '<img src=\'' + rank.icon + '\'> ' +
             rank.id +
-            "</p>" +
-            "</div>"
+            '</p>' +
+            '</div>';
       });
 
-      $("#ranks").html(code)
+      $('#ranks').html(code);
     },
-    "json"
+    'json'
 );

@@ -1,34 +1,39 @@
 @import url(http://fonts.googleapis.com/css?family=Press+Start+2P);
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
-
 @import url(https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css);
 @import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css);
 
 body {
-    font: 1.6em "Roboto";
-    background-color: #EFE0B9;
-    color: #B7521E;
-    margin-bottom: 5%;
+  font: 1.6em "Roboto";
+  background-color: #efe0b9;
+  color: #b7521e;
+  margin-bottom: 5%;
 }
 
 #calendar {
-    background-color: #E4B04A;
+  background-color: #e4b04a;
 }
 
 #dialog-box {
-    display: none;
+  display: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    color: #643B0F;
-    text-align: center;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #643b0f;
+  text-align: center;
 }
 
 nav > li {
-    border: 1px #B7521E;
+  border: 1px #b7521e;
 }
 
 /* April Fools CSS */
+
 /*
 body {
     -webkit-transform: rotate(3deg);
@@ -37,56 +42,103 @@ body {
 */
 
 /* Marquee */
+
 /* Original source: https://jsfiddle.net/jonathansampson/xxuxd/ */
 .marquee {
-    width: 95%;
-    margin: 0 auto;
-    overflow: hidden;
-    white-space: nowrap;
-    box-sizing: border-box;
-    animation: marquee 20s linear infinite;
+  width: 95%;
+  margin: 0 auto;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  animation: marquee 20s linear infinite;
 }
 
 .marquee:hover {
-    animation-play-state: paused
+  animation-play-state: paused;
 }
 
 @keyframes marquee {
-    0%   { text-indent: 75% }
-    100% { text-indent: -125% }
+  0% {
+    text-indent: 75%;
+  }
+
+  100% {
+    text-indent: -125%;
+  }
 }
+
 /* end jsfiddle */
 
 /* Pixel Font and Borders */
+
 /* Original source: https://codepen.io/albpara/pen/xDBvc/ */
 .sab {
-    margin: 1em;
-    font: 1.4em "Press start 2P";
-    font-weight: 100;
-    line-height: 200%;
+  margin: 1em;
+  font: 1.4em "Press start 2P";
+  font-weight: 100;
+  line-height: 200%;
 }
 
 .sab-box {
-    box-sizing: border-box;
-    box-shadow: 5px 0 #EFE0B9, -5px 0 #EFE0B9, 0 -5px #EFE0B9, 0 5px #EFE0B9, 
-    10px 0 #EFE0B9, -10px 0 #EFE0B9, 0 -10px #EFE0B9, 0 10px #EFE0B9, 
-    0 0 0 5px #EFE0B9, 15px 0 #EFE0B9, -15px 0 #EFE0B9, 0 15px #EFE0B9, 
-    0 -15px #EFE0B9, 0 -5px 0 5px #EFE0B9, 0 5px 0 5px #EFE0B9, 5px 0 0 5px #EFE0B9, 
-    -5px 0 0 5px #EFE0B9, 
-    20px 0 #643B0F, -20px 0 #643B0F, 0 -20px #643B0F, 0 20px #643B0F, 
-    10px 0 0 5px #643B0F, -10px 0 0 5px #643B0F, 0 10px 0 5px #643B0F, 0 -10px 0 5px #643B0F, 
-    0 0 0 10px #643B0F;
-    margin: 20px auto;
+  box-sizing: border-box;
+  box-shadow:
+    5px 0 #efe0b9,
+    5px 0 #efe0b9,
+    0 -5px #efe0b9,
+    0 5px #efe0b9,
+    10px 0 #efe0b9,
+    -10px 0 #efe0b9,
+    0 -10px #efe0b9,
+    0 10px #efe0b9,
+    0 0 0 5px #efe0b9,
+    15px 0 #efe0b9,
+    -15px 0 #efe0b9,
+    0 15px #efe0b9,
+    0 -15px #efe0b9,
+    0 -5px 0 5px #efe0b9,
+    0 5px 0 5px #efe0b9,
+    5px 0 0 5px #efe0b9,
+    -5px 0 0 5px #efe0b9,
+    20px 0 #643b0f,
+    -20px 0 #643b0f,
+    0 -20px #643b0f,
+    0 20px #643b0f,
+    10px 0 0 5px #643b0f,
+    -10px 0 0 5px #643b0f,
+    0 10px 0 5px #643b0f,
+    0 -10px 0 5px #643b0f,
+    0 0 0 10px #643b0f;
+  margin: 20px auto;
 }
 
 h1.sab-box {
-    box-shadow: 5px 0 #643B0F, -5px 0 #643B0F, 0 -5px #643B0F, 0 5px #643B0F,
-    10px 0 #643B0F, -10px 0 #643B0F, 0 -10px #643B0F, 0 10px #643B0F,
-    0 0 0 5px #643B0F, 15px 0 #643B0F, -15px 0 #643B0F, 0 15px #643B0F,
-    0 -15px #643B0F, 0 -5px 0 5px #643B0F, 0 5px 0 5px #643B0F, 5px 0 0 5px #643B0F,
-    -5px 0 0 5px #643B0F,
-    20px 0 #EFE0B9, -20px 0 #EFE0B9, 0 -20px #EFE0B9, 0 20px #EFE0B9,
-    10px 0 0 5px #EFE0B9, -10px 0 0 5px #EFE0B9, 0 10px 0 5px #EFE0B9, 0 -10px 0 5px #EFE0B9,
-    0 0 0 10px #EFE0B9;
+  box-shadow:
+    5px 0 #643b0f,
+    5px 0 #643b0f,
+    0 -5px #643b0f,
+    0 5px #643b0f,
+    10px 0 #643b0f,
+    -10px 0 #643b0f,
+    0 -10px #643b0f,
+    0 10px #643b0f,
+    0 0 0 5px #643b0f,
+    15px 0 #643b0f,
+    -15px 0 #643b0f,
+    0 15px #643b0f,
+    0 -15px #643b0f,
+    0 -5px 0 5px #643b0f,
+    0 5px 0 5px #643b0f,
+    5px 0 0 5px #643b0f,
+    -5px 0 0 5px #643b0f,
+    20px 0 #efe0b9,
+    -20px 0 #efe0b9,
+    0 -20px #efe0b9,
+    0 20px #efe0b9,
+    10px 0 0 5px #efe0b9,
+    -10px 0 0 5px #efe0b9,
+    0 10px 0 5px #efe0b9,
+    0 -10px 0 5px #efe0b9,
+    0 0 0 10px #efe0b9;
 }
+
 /* end codepen */

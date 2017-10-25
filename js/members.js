@@ -15,7 +15,7 @@ var commonName = function(name) {
     // 'memattm.1469': 'Eldrazzi',
     // 'ArcticRose.5280': 'Rosie Arrow',
     // 'Caliber.9237': 'Major Caliber',
-    'Arithmancer.5307': 'Dancira'
+    'Arithmancer.5307': 'Dancira',
   };
 
   return accounts[name] ? accounts[name] : '';
@@ -31,22 +31,22 @@ $.get('https://api.guildwars2.com/v2/guild/' + guildId + '/members?access_token=
   var memberCode = function(member, index, array) {
     var size = function() {
       if (array.length === 1 || (array.length % 2 === 1 && index === array.length - 1)) {
-        return 'col-xs-12'
+        return 'col-xs-12';
       } else {
-        return 'col-xs-6'
+        return 'col-xs-6';
       }
     };
     var row = (index % 2 === 1) ? ['<div class="row">', '</div>'] : ['', ''];
 
-    return row[0] + "<div class='" + size() + "'>" +
-        "<h2>" + member.name + "</h2>" +
-        "<p>" + member.rank + "</p>" +
-        "<h4>" + commonName(member.name) + "</h4>" +
-        "</div>" + row[1];
+    return row[0] + '<div class=\'' + size() + '\'>' +
+        '<h2>' + member.name + '</h2>' +
+        '<p>' + member.rank + '</p>' +
+        '<h4>' + commonName(member.name) + '</h4>' +
+        '</div>' + row[1];
   };
 
   data.forEach(function(member) {
-    //todo don't hard code rank names -- this is rank.order 1 && rank.order 2-4
+    // todo don't hard code rank names -- this is rank.order 1 && rank.order 2-4
     switch (member.rank) {
       case 'Moondremoth':
         leaders.push(member);
@@ -75,8 +75,8 @@ $.get('https://api.guildwars2.com/v2/guild/' + guildId + '/members?access_token=
     webDevCode = webDevCode + memberCode(member, index, array);
   });
 
-  $("#leader-info").html(leaderCode);
+  $('#leader-info').html(leaderCode);
   $('#officer-info').html(officerCode);
   $('#web-dev').html(webDevCode);
   $('#member-count').html(data.length);
-}, "json");
+}, 'json');

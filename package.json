@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A guild site for the Guild Wars 2 guild [SAND] - That's No Tornado",
   "main": "index.html",
-  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/DryTopSAND/SAND"
@@ -22,5 +21,18 @@
     "jquery": "^2.2.2",
     "jquery-ui-bundle": "^1.11.4",
     "moment": "^2.12.0"
+  },
+  "scripts": {
+    "eslint": "node_modules/eslint/bin/eslint.js",
+    "eslint-all": "npm run eslint -- js/*.js",
+    "eslint-all-fix": "npm run eslint-all -- --fix",
+    "stylelint": "node_modules/stylelint/bin/stylelint.js",
+    "stylelint-all": "npm run stylelint -- css/*.css"
+  },
+  "devDependencies": {
+    "eslint": "^4.9.0",
+    "eslint-config-google": "^0.9.1",
+    "stylelint": "^8.2.0",
+    "stylelint-config-standard": "^17.0.0"
   }
 }

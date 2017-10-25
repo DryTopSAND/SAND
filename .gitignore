@@ -150,3 +150,5 @@ jspm_packages
 /node_modules/moment/.npmignore
 /node_modules/moment/package.js
 /node_modules/moment/moment.js
+
+/node_modules
