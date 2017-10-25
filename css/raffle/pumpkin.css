@@ -1,89 +1,97 @@
-body
-{
-	font-family: Arial;
-	background-color: #efe0b9;
-	color: #b7521e;
-	text-align: center;
-	margin-bottom: 15px;
+body {
+  font-family: Arial;
+  background-color: #efe0b9;
+  color: #b7521e;
+  text-align: center;
+  margin-bottom: 15px;
 }
-h2, h3
-{
-	margin-top: 15px;
-	color: #643b0f;
+
+h2,
+h3 {
+  margin-top: 15px;
+  color: #643b0f;
 }
-#total
-{
-	line-height: 150%;
+
+#total {
+  line-height: 150%;
 }
-#log
-{
-	margin-top: 15px;
+
+#log {
+  margin-top: 15px;
 }
-.watable
-{
-	margin: 0 auto;
+
+.watable {
+  margin: 0 auto;
 }
-a
-{
-	color: #87643a;
+
+a {
+  color: #87643a;
 }
-a:hover
-{
-	color: #87643a;
-	text-decoration: underline;
+
+a:hover {
+  color: #87643a;
+  text-decoration: underline;
 }
-.glyphicon
-{
-	color: #643b0f;
+
+.glyphicon {
+  color: #643b0f;
 }
-.table-striped>tbody>tr:nth-child(odd)
-{
-	background-color: #f4ebd1;
+
+.table-striped > tbody > tr:nth-child(odd) {
+  background-color: #f4ebd1;
 }
-.table-striped>tbody>tr:hover
-{
-	background-color: #f6f6f6;
+
+.table-striped > tbody > tr:hover {
+  background-color: #f6f6f6;
 }
-.table-striped>tbody>tr
-{
-	cursor: default;
+
+.table-striped > tbody > tr {
+  cursor: default;
 }
-table.table-bordered, table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td
-{
-    border: 1px solid #a98d64;
+
+table.table-bordered,
+table.table-bordered > thead > tr > th,
+table.table-bordered > tbody > tr > td {
+  border: 1px solid #a98d64;
 }
-.pagination>li>a,.pagination>.disabled>a,.pagination>.disabled>a:hover,.pagination>.disabled>a:active,.pagination>.disabled>a:focus
-{
-	background-color: #efe0b9;
-	border: 1px solid #a98d64;
-	color: #87643a;
+
+.pagination > li > a,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:active,
+.pagination > .disabled > a:focus {
+  background-color: #efe0b9;
+  border: 1px solid #a98d64;
+  color: #87643a;
 }
-.pagination>li>a:hover
-{
-	background-color: #f6f6f6;
-	border: 1px solid #a98d64;
-	color: #87643a;
+
+.pagination > li > a:hover {
+  background-color: #f6f6f6;
+  border: 1px solid #a98d64;
+  color: #87643a;
 }
-.pagination>.active>a,.pagination>.active>a:hover
-{
-	background-color: #f4ebd1;
-	border: 1px solid #a98d64;
-	color: #87643a;
+
+.pagination > .active > a,
+.pagination > .active > a:hover {
+  background-color: #f4ebd1;
+  border: 1px solid #a98d64;
+  color: #87643a;
 }
-.btn-default
-{
-	background-color: #efe0b9;
-	border: 1px solid #a98d64;
+
+.btn-default {
+  background-color: #efe0b9;
+  border: 1px solid #a98d64;
 }
-.btn-toolbar .btn-group, .btn-toolbar .input-group
-{
-	float: none;
+
+.btn-toolbar .btn-group,
+.btn-toolbar .input-group {
+  float: none;
 }
-tfoot p
-{
-	padding: 3px 0 6px 0;
+
+tfoot p {
+  padding: 3px 0 6px;
 }
-.watable th
-{
-	white-space: normal;
+
+.watable th {
+  white-space: normal;
 }
