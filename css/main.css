@@ -90,3 +90,8 @@ h1.sab-box {
     0 0 0 10px #EFE0B9;
 }
 /* end codepen */
+
+.page-header {
+   margin: 20px 0 20px;
+   border-bottom: 0px;
+}
