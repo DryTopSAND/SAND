@@ -1,0 +1,57 @@
+.container {
+  line-height: 140%;
+}
+h2 {
+  margin: 5px 0 20px;
+}
+body {
+  margin-bottom: 25px;
+}
+.pumpkin {
+  position: relative;
+  width: 180px;
+  height: 140px;
+  border-radius: 110px / 120px;
+  background-color: #b64d00;
+  background-image: radial-gradient(ellipse at 150px 5px, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%);
+}
+
+.pumpkin:before,
+.pumpkin:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 90px / 120px;
+}
+
+.pumpkin:before {
+  left: 18%;
+  border-left: 1.5px solid rgba(0,0,0,0.1)
+}
+
+.pumpkin:after {
+  right: 18%;
+  border-right: 1.5px solid rgba(0,0,0,0.1)
+}
+
+.pumpkin-stem {
+  position: absolute;
+  top: -17px;
+  left: 80px;
+  height: 20px;
+  width: 20px;
+  background-color: #194d14;
+  border-bottom-left-radius: 1.5px;
+  border-bottom-right-radius: 1.5px;
+  border-top-left-radius: 11.5px;
+  border-top-right-radius: 5px;
+  background-image: linear-gradient(to right, rgba(0,0,0,0.3) 0%, rgba(0,0,0,.1) 58%, rgba(0,0,0,.1) 62%, rgba(0,0,0,0.3) 100%);
+}
+.pumpkin-ctr {
+  padding-top: 30px;
+}
+a {
+  font-weight: bold;
+}
