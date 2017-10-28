@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>[SAND] Raffle Drawing</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/raffle/raffle-draw.css">
+    <link rel="stylesheet" href="css/raffle/watable.css">
+    <link rel="stylesheet" href="css/sweetalert2.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="js/raffle/WATable/jquery.watable.js"></script>
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
+    <script src="js/sweetalert2.min.js"></script>
+    <script src="js/fireworks.js"></script>
+</head>
+<body>
+<script>
+    var itemId = 72271;		// pumpkin id
+    var users = {};
+    var minUsers = {};
+    var participants = {};
+    var logItems = {};
+    var tickets = [];
+    var audio;
+    $(function() {
+
+        // fetch the transaction history from a remote server
+        $.getJSON("http://167.114.130.199/SAND/log.json", function(log) {
+
+            logItems = sort(log);
+            refreshUsers();
+        });
+
+        $('#min').change(refreshUsers);
+        $('#add').change(refreshTickets);
+        $('#users').change(updateUsers);
+    });
+
+    /**
+     * Gets the list of participants into the raffle,
+     * the users who have deposited the minimum # of items
+     * @param {Array} logItems The log history of deposits for the raffle item
+     * @param {int} minEntry The minimum # of items that must be deposited for entry into raffle
+     * @param {int} itemId The GW2 ID of the raffle item
+     * @return {Object} A mapping of user => # items
+     */
+    function getMinUsers(logItems, minEntry, itemId) {
+
+        sort(logItems);
+
+        // get all users who have contributed the item
+        var users = {};
+        $.each(logItems, function(i, logItem) {
+            if (logItem.type == 'upgrade' && logItem.action == 'completed' && logItem.item_id == itemId) {
+                var user = logItem.user;
+                if (user in users)
+                    users[user]++;
+                else
+                    users[user] = 1;
+            }
+        });
+
+        // filter to those who have contributed the minimum # of entries
+        var minUsers = {};
+        for (var user in users) {
+            if (users[user] >= minEntry)
+                minUsers[user] = users[user];
+        }
+
+        sort(logItems);
+
+        return minUsers;
+    }
+
+    /**
+     * Populates the participants select box
+     * @param {Object} users mapping of username => # of entries
+     */
+    function populateUsers(users) {
+
+        participants = {};
+
+        // clear existing options
+        $('#users').find('option').remove();
+
+        for (var user in users) {
+            $('#users').append($('<option>', {
+                value: user,
+                text: user,
+                selected: 1
+            }));
+            participants[user] = users[user];
+        }
+    }
+
+    /**
+     * Rebuilds the list of tickets
+     * Using information from the input boxes at the top of the page
+     */
+    function refreshTickets() {
+
+        // get the list of raffle tickets
+        var minEntry = $('#min').val();
+        var addEntry = $('#add').val();
+        tickets = getTickets(logItems, itemId, minEntry, addEntry, participants);
+
+        // build the list of ordered raffle tickets
+        buildTickets(tickets);
+    }
+
+    /**
+     * Rebuilds the list of participants
+     * Using the information from the 'Minimum to enter' input box
+     */
+    function refreshUsers() {
+
+        // get list of participants with minimum # of entries
+        var minEntry = $('#min').val();
+        minUsers = getMinUsers(logItems, minEntry, itemId);
+
+        // populate the participants list
+        populateUsers(minUsers);
+
+        refreshTickets();
+    }
+
+    /**
+     * Called when participants are selected/deselected
+     */
+    function updateUsers() {
+
+        participants = {};
+
+        $('#users option:selected').each(function() {
+            var user = $(this).val();
+            participants[user] = users[user];
+        });
+
+        refreshTickets();
+    }
+
+    /**
+     * Calculates an ordered list of ticket #s
+     * @param {Array} logItems the list of log items to evalulate for tickets
+     * @param {int} itemId the id of the raffle item
+     * @param {int} minEntry the minimum # of items deposited to enter the raffle
+     * @param {int} addEntry additional raffle entries after minimum
+     * @param {Object} participants the list of selected / active users in the raffle
+     */
+    function getTickets(logItems, itemId, minEntry, addEntry, participants) {
+
+        // get all users who have contributed the item
+        var users = {};
+        var tickets = [];
+        $.each(logItems, function(i, logItem) {
+            if (logItem.type == 'upgrade' && logItem.action == 'completed' && logItem.item_id == itemId) {
+                var user = logItem.user;
+                if (!(user in participants)) return;
+                if (user in users)
+                    users[user]++;
+                else
+                    users[user] = 1;
+
+                // does this constitute a raffle ticket?
+                if (users[user] == minEntry)
+                    tickets.push(logItem);
+
+                if (users[user] > minEntry)
+                {
+                    var numAfter = users[user] - minEntry;
+                    if (numAfter % addEntry == 0)
+                        tickets.push(logItem);
+                }
+            }
+        });
+        return tickets;
+    }
+
+    /**
+     * Rebuilds the displayed table of tickets
+     * @param {Array} logItems the list of raffle entries
+     */
+    function buildTickets(logItems) {
+
+        // build the log table
+        $('#log').empty();
+        var cols = {
+            '#': {
+                index: 1,
+                type: 'number',
+                unique: true,
+                sortOrder: 'desc'
+            },
+            id: {
+                index: 2,
+                type: 'number',
+                unique: true
+            },
+            user: {
+                index: 3,
+                type: 'string',
+                unique: false
+            },
+            time: {
+                index: 4,
+                type: 'string',
+                unique: false
+            }
+        };
+
+        // reformat data
+        var rows = [];
+        for (var i = 0; i < logItems.length; i++)
+        {
+            var logItem = logItems[i];
+            var row = {
+                '#': i + 1,
+                id: logItem.id,
+                user: logItem.user,
+                time: moment(logItem.time).format('MMM D YYYY hh:mm:ss a')
+            };
+            rows.push(row);
+        }
+        var data = {
+            cols: cols,
+            rows: rows
+        };
+        $('#log').WATable({
+            data: data,
+            pageSize: 20
+        });
+    }
+
+    /**
+     * Reverses the log from descending to ascending
+	 * @param {Array} log the logged items to sort
+     */
+    function sort(log) {
+        // items are listed newest entries first by default
+        // reverse so that oldest entries are first
+        return log.reverse();
+    }
+
+    /**
+     * Selects a random ticket
+     * and displays the winner
+     */
+    function draw() {
+
+        console.log(tickets);
+
+        var numTickets = tickets.length;
+        console.log("Number of tickets: " + numTickets);
+
+        // select a random ticket
+        var random = getRandomInt(1, tickets.length);
+        console.log('Winning ticket #' + random);
+
+        // get the winner
+        // array is indexed from 0,
+        // tickets are indexed from 1,
+        // so we subtract 1 from random here...
+        var winner = tickets[random - 1];
+
+        console.log('WINNER: ' + winner.user + ' (Ticket #' + random + ')');
+        swal({
+            title: winner.user,
+            text: 'Ticket #' + random,
+            type: 'success',
+            confirmButtonColor: '#449d44',
+            onOpen: function() {
+                startFireworks();
+                $('ul.pagination').hide();
+                $('#fireworks').show();
+                setTimeout(function() {
+                    audio = new Audio('audio/winner.m4a');
+                    audio.play();
+                }, 250);
+            },
+            onClose: function() {
+                stopFireworks();
+                $('ul.pagination').show();
+                $('#fireworks').hide();
+                audio.pause();
+            }
+        });
+    }
+
+    /**
+     * Get a random integer between `min` and `max`.
+     * Reference:
+     * https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
+     *
+     * @param {number} min - min number
+     * @param {number} max - max number
+     * @return {number} a random integer
+     */
+    function getRandomInt(min, max) {
+
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+</script>
+<h3>[SAND] Raffle Drawing</h3>
+<label for="min">Minimum to enter:</label><input type="text" value="10" id="min"><br>
+<label for="add">Additional entry per:</label><input type="text" value="2" id="add">
+<hr>
+<label for="users">Participants:</label>
+<select multiple id="users"></select>
+<div id="log"></div>
+<hr>
+<button type="button" class="btn btn-success" onclick="draw();">SELECT WINNER</button><br>
+<canvas id="fireworks"></canvas>
+</body>
+</html>

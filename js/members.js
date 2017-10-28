@@ -16,6 +16,8 @@ var commonName = function(name) {
     // 'ArcticRose.5280': 'Rosie Arrow',
     // 'Caliber.9237': 'Major Caliber',
     'Arithmancer.5307': 'Dancira',
+    'briana.3092': 'Kenwynna',
+    'gmriggs.4628': 'L Cifarelli'
   };
 
   return accounts[name] ? accounts[name] : '';

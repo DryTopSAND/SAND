@@ -5,19 +5,17 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-    <title>[SAND] That's No Tornado</title>
+    <title>[SAND] Halloween Raffle</title>
 
     <link rel='icon' href='favicon.ico' sizes='16x16 32x32' type='image/png'>
     <meta name='description' content="A website for information on the Guild Wars 2 guild [SAND] - That's No Tornado">
     <meta name='keywords' content='GW2,Guild Wars 2,Dry Top,SAND,guild'>
 
     <link rel='stylesheet' type='text/css' href='css/main.css'/>
+    <link rel='stylesheet' type='text/css' href='css/raffle/raffle.css'/>
 </head>
 
 <body>
-<div class="page-header text-center">
-  <h1 class="marquee" style="background-color: #643b0f; color: #efe0b9; border-radius: 10px; padding: 3px;">🎃 Enter the <a href="raffle.html">Halloween Raffle</a>! 🎃</h1>
-</div>
 <nav class='navbar navbar-inverse navbar-static-top'>
     <div class='container'>
         <div class='container-fluid'>
@@ -65,19 +63,23 @@
 
 <canvas id="canvas" style="display: block; position: absolute;"></canvas>
 <div class='container'>
-    <div class='row'>
-        <div class='col-md-2 col-xs-12 text-center'>
-            <img src='http://guilds.gw2w2w.com/guilds/thats-no-tornado/256.svg' id='guild-logo'/>
-        </div>
-        <div class='col-md-8 col-xs-12 text-center' style='padding-top: 8%'>
-            <h1>[SAND] That's No Tornado</h1>
-        </div>
+    <div class='col-xs-12 text-center'>
+        <h2>[SAND] Halloween Raffle</h2>
     </div>
-
-    <div class='col-xs-12'>
-        <h3>Message of the Day:</h3>
-        <div id='motd'></div>
-    </div>
+    <p>
+        Witches, Ghouls, and Mummies of all ages: we are having a Raffle! This year introduced 6 new decorations for our guild hall, and some of them require up to 150 Pumpkins! With this in mind, we wanted to give members a significant incentive to part with some of their Candy Corn! The  Grand Prize is a <a href="https://wiki.guildwars2.com/wiki/Spooky_Mounts_Pack">Spooky Mount Set</a> that has been donated to us!
+	</p>
+	<p>
+		10 Pumpkins are required to enter, which automatically gives you your first raffle ticket. Every 2 Pumpkins after that equals one ticket! There is no limit on how many times you can enter either, so go wild! However, we do ask that you track your own entries for us by taking a screen shot of the guild history with your donations. (We have a special log in place that tracks donations. We just ask that you keep track of your own just as a precautionary measure.) Once your screen shot is taken simply send a mail to Moon to notify her. Here's to everyone having a great Halloween, and good luck!
+	</p>
+    <p class="text-center">🎃🎃🎃🎃🎃🎃🎃🎃🎃🎃</p>
+    <p>
+        The raffle will end on November 7th the moment the Halloween season ends in Tyria. Entries will be numbered according to the time they are entered, and winners will be chosen via a random number generator online.
+    </p>
+    <p>
+        There will be four additional winners chosen at random for the secondary prizes: a <a href="https://wiki.guildwars2.com/wiki/Permanent_Ley_Line_Finisher">Permanent Ley Line Finisher</a>, the <a href="https://wiki.guildwars2.com/wiki/Glint%27s_Scale">Glint's Scale focus</a> (x2), and the precursor to Kraitkin, <a href="https://wiki.guildwars2.com/wiki/Venom_(weapon)">Venom</a>.
+    </p>
+    <center><div class="pumpkin-ctr"><div class="pumpkin"><div class="pumpkin-stem"></div></div></div></center>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -91,7 +93,8 @@
         crossorigin="anonymous"></script>
 
 <script src='js/main.js'></script>
-<script src='js/motd.js'></script>
+<script src="js/members.js"></script>
+<script src="js/halloween.js"></script>
 
 <script>
   (function(i, s, o, g, r, a, m) {
@@ -108,7 +111,18 @@
 
   ga('create', 'UA-19228491-3', 'auto');
   ga('send', 'pageview');
-
+  
+  $.fn.halloweenBats({
+    image: 'images/bats.png', // Path to the image.
+    zIndex: 10000, // The z-index you need.
+    amount: 4, // Bat amount.
+    width: 35, // Image width.
+    height: 20, // Animation frame height.
+    frames: 4, // Amount of animation frames.
+    speed: 20, // Higher value = faster.
+    flickering: 15, // Higher value = slower.
+    target: 'body' // Target element
+  });
 </script>
 </body>
 </html>
