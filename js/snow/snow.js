@@ -30,7 +30,7 @@ $(document).ready(function() {
     for (var i = 0; i < mp; i++) {
         var p = particles[i];
         this.g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
-        this.g.addColorStop(0, 'hsla(255,255%,255%,1)');
+        this.g.addColorStop(0, 'hsla(255,255%,255%,0.8)');
         this.g.addColorStop(1, 'hsla(255,255%,255%,0.5)');
         ctx.moveTo(p.x, p.y);
         ctx.fillStyle = this.g;
@@ -118,7 +118,7 @@ function initParticles()
     particles.push({
       x: Math.random() * W, //x-coordinate
       y: Math.random() * H, //y-coordinate
-      r: Math.random() * 3.25 + 2, //radius
+      r: Math.random() * 4 + 1, //radius
       d: Math.random() * mp //density
     })
   }
@@ -136,9 +136,9 @@ function getParticles()
     
     var area = width * height;
     
-    var smallScreen = 600000;   // ~1024x768 inner area
-    var largeScreen = 1800000;  // ~1920x1080 inner area
-    
+    var smallScreen = 600000;   // mobile inner area
+    var largeScreen = 1800000;  // desktop inner area
+	
     var numParticles = projection(area, smallScreen, largeScreen, minParticles, maxParticles);
     
     return Math.round(numParticles);
