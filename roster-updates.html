@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>[SAND] Roster Updates</title>
+<link rel='stylesheet' type='text/css' href='css/main.css'/>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<style>
+body
+{
+    margin: 15px;
+}
+h1
+{
+    margin: 0 0 10px 0;
+    text-align: left;
+    white-space: nowrap;
+}
+hr
+{
+    height: 1px;
+    border: 0px;
+    background-color: #643b0f;
+    opacity: 0.2;
+    margin-top: 9px;
+    text-align: left;
+    margin: 20px auto 15px 0;
+    width: 239px;
+}
+</style>
+</head>
+<body>
+<div class="log">
+<h1>New SANDies:</h1>
+<ul id="joined"></ul>
+<hr>
+<h1>Departures:</h1>
+<ul id="departed"></ul>
+</div>
+<script>
+var guildId = '239F7382-9E2F-E511-A5A9-AC162DAE5A05';
+var token = 'B2A35DED-9550-7044-9B1D-A0676E03384D3AD9486C-73ED-435F-9258-2FB2BA53F035';
+$.get('https://api.guildwars2.com/v2/guild/' + guildId + '/log?access_token=' + token, function(data) {
+    var joins = [];
+    var kicks = [];
+    var maxlength = 15;
+    data.forEach(function(logItem) {
+        //console.log(logItem);
+        if (logItem.type == 'joined' && joins.length != maxlength)
+            joins.push(logItem);
+        if (logItem.type == 'kick' && kicks.length != maxlength)
+            kicks.push(logItem);
+    });
+    //console.log("New SANDies:");
+    joins.forEach(function(logItem) {
+        //console.log(logItem.user);
+        $('#joined').append('<li>' + logItem.user + '</li>');
+    });
+    
+    //console.log("---------------");
+    //console.log("Departures:");
+    kicks.forEach(function(logItem) {
+        //console.log(logItem.user);
+        $('#departed').append('<li>' + logItem.user + '</li>');
+    });
+});
+</script>
+</body>
+</html>
