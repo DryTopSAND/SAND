@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>[SAND] Wintersday Donations</title>
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<link rel='stylesheet' type='text/css' href='css/main.css'/>
 <link rel="stylesheet" href="css/raffle/pumpkin.css">
 <link rel="stylesheet" href="css/raffle/watable.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -15,78 +16,122 @@
 </head>
 <body>
 <script>
-var id = 77629;		// snow pile id
+var id = 77629;     // snow pile id
 var users = {};
 $(function() {
 
-	// fetch the transaction history from a remote server
-	$.getJSON("http://167.114.130.199/SAND/log.json", function(logItems) {
-		
-		// calculate totals
-		$.each(logItems, function(i, logItem) {
-			if (logItem.type == 'upgrade' && logItem.action == 'completed' && logItem.item_id == id) {
-				var user = logItem.user;
-				if (user in users)
-					users[user]++;
-				else
-					users[user] = 1;
-			}
-		});
-		var html = '';
-		$.each(users, function(idx, val) {
-			html += idx + ' = ' + val + '<br>';
-		});
-		$('#total').html(html);
-		
-		// build the log table
-		var cols = {
-			'#': {
-				index: 1,
-				type: 'number',
-				unique: true,
-				sortOrder: 'desc'
-			},
-			id: {
-				index: 2,
-				type: 'number',
-				unique: true
-			},
-			user: {
-				index: 3,
-				type: 'string',
-				unique: false
-			},
-			time: {
-				index: 4,
-				type: 'string',
-				unique: false
-			}			
-		};
-		// reformat data
-		var rows = [];
-		for (var i = 0; i < logItems.length; i++)
-		{
-			var logItem = logItems[logItems.length - 1 - i];
-			var row = {
-				'#': i + 1,
-				id: logItem.id,
-				user: logItem.user,
-				time: moment(logItem.time).format('MMM D YYYY hh:mm:ss a'),
-				'row-cls': 'tblrow'
-			};
-			rows.push(row);
-		}
-		var data = {
-			cols: cols,
-			rows: rows
-		};
-		$('#log').WATable({
-			data: data,
-			pageSize: 20
-		});
-	});
+    // fetch the transaction history from a remote server
+    $.getJSON("http://167.114.130.199/SAND/log.json", function(logItems) {
+        
+        // calculate totals
+        $.each(logItems, function(i, logItem) {
+            if (logItem.type == 'upgrade' && logItem.action == 'completed' && logItem.item_id == id) {
+                var user = logItem.user;
+                if (user in users)
+                    users[user]++;
+                else
+                    users[user] = 1;
+            }
+        });
+        var html = '';
+        $.each(users, function(idx, val) {
+            html += idx + ' = ' + val + '<br>';
+        });
+        $('#total').html(html);
+        
+        // build the log table
+        var cols = {
+            '#': {
+                index: 1,
+                type: 'number',
+                unique: true,
+                sortOrder: 'desc'
+            },
+            id: {
+                index: 2,
+                type: 'number',
+                unique: true
+            },
+            user: {
+                index: 3,
+                type: 'string',
+                unique: false
+            },
+            time: {
+                index: 4,
+                type: 'string',
+                unique: false
+            }           
+        };
+        // reformat data
+        var rows = [];
+        for (var i = 0; i < logItems.length; i++)
+        {
+            var logItem = logItems[logItems.length - 1 - i];
+            var row = {
+                '#': i + 1,
+                id: logItem.id,
+                user: logItem.user,
+                time: moment(logItem.time).format('MMM D YYYY hh:mm:ss a'),
+                'row-cls': 'tblrow'
+            };
+            rows.push(row);
+        }
+        var data = {
+            cols: cols,
+            rows: rows
+        };
+        $('#log').WATable({
+            data: data,
+            pageSize: 20
+        });
+    });
 });
 </script>
+<nav class='navbar navbar-inverse navbar-static-top'>
+    <div class='container'>
+        <div class='container-fluid'>
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class='navbar-header'>
+                <button type='button'
+                        class='navbar-toggle collapsed'
+                        data-toggle='collapse'
+                        data-target='#navbar-collapse-1'
+                        aria-expanded='false'>
+                    <span class='sr-only'>Toggle navigation</span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                </button>
+                <a class='navbar-brand' href='index.html'>[SAND] That's No Tornado</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class='collapse navbar-collapse' id='navbar-collapse-1'>
+                <ul class='nav navbar-nav navbar-left'>
+                    <li><a href='calendar.html'>Events</a></li>
+                    <li><a href='social.html'>Social</a></li>
+                </ul>
+                <ul class='nav navbar-nav navbar-right'>
+                    <li><a href='dry-top-guide.html'>New to Dry Top?</a></li>
+                    <li><a href='about-us.html'>About the Guild</a></li>
+                    <li><a href='leadership.html'>Guild Leadership</a></li>
+                    <li><a href='recruitment.html'>Guild Recruitment</a></li>
+                    <li class='dropdown'>
+                        <a href='#' class='dropdown-toggle'
+                           data-toggle='dropdown'
+                           role='button'
+                           aria-haspopup='true' aria-expanded='false'>Site Info <span class='caret'></span></a>
+                        <ul class='dropdown-menu'>
+                            <li><a href='http://goo.gl/forms/6ndcBX7EYC'>Site Feedback</a></li>
+                            <li><a href='https://github.com/DryTopSAND'>Contribute Updates</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> <!-- /.navbar-collapse -->
+        </div> <!-- /.container-fluid -->
+    </div>
+</nav>
 <h3>[SAND] Wintersday Donations</h3>
 <div id="total"></div>
 <div id="log"></div>
