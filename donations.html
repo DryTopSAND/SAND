@@ -16,7 +16,7 @@
 </head>
 <body>
 <script>
-var ids = [77629, 86521];	// snow pile and snow mound
+var ids = [77629, 86521];   // snow pile and snow mound
 var users = {};
 $(function() {
 
@@ -47,11 +47,16 @@ $(function() {
                 unique: true,
                 sortOrder: 'desc'
             },
-            id: {
+            /*id: {
                 index: 2,
                 type: 'number',
                 unique: true
-            },
+            },*/
+			item: {
+				index: 2,
+				type: 'string',
+				unique: false
+			},
             user: {
                 index: 3,
                 type: 'string',
@@ -70,7 +75,8 @@ $(function() {
             var logItem = logItems[logItems.length - 1 - i];
             var row = {
                 '#': i + 1,
-                id: logItem.id,
+                //id: logItem.id,
+				item: get_item(logItem.item_id),
                 user: logItem.user,
                 time: moment(logItem.time).format('MMM D YYYY hh:mm:ss a'),
                 'row-cls': 'tblrow'
@@ -87,6 +93,13 @@ $(function() {
         });
     });
 });
+function get_item(id)
+{
+	if (id == 77629)
+		return "Snow Pile";
+	else if (id == 86521)
+		return "Snow Mound";
+}
 </script>
 <nav class='navbar navbar-inverse navbar-static-top'>
     <div class='container'>
