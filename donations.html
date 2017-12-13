@@ -16,7 +16,7 @@
 </head>
 <body>
 <script>
-var id = 77629;     // snow pile id
+var ids = [77629, 86521];	// snow pile and snow mound
 var users = {};
 $(function() {
 
@@ -25,7 +25,7 @@ $(function() {
         
         // calculate totals
         $.each(logItems, function(i, logItem) {
-            if (logItem.type == 'upgrade' && logItem.action == 'completed' && logItem.item_id == id) {
+            if (logItem.type == 'upgrade' && logItem.action == 'completed' && ids.indexOf(logItem.item_id) !== -1) {
                 var user = logItem.user;
                 if (user in users)
                     users[user]++;
