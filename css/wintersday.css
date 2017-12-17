@@ -65,9 +65,15 @@ body {
 
 h2 {
   margin-top: 0;
+  line-height: 140%;
 }
 .container {
   line-height: 133%;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  padding-left: 20px;
 }
 li {
   margin-bottom: 6px;
