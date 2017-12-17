@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <title>[SAND] Wintersday Raffle</title>
+
+    <link rel='icon' href='favicon.ico' sizes='16x16 32x32' type='image/png'>
+    <meta name='description' content="A website for information on the Guild Wars 2 guild [SAND] - That's No Tornado">
+    <meta name='keywords' content='GW2,Guild Wars 2,Dry Top,SAND,guild'>
+
+    <link rel='stylesheet' type='text/css' href='css/main.css'/>
+	<link rel='stylesheet' type='text/css' href='css/wintersday.css'/>
+	<link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'/>
+</head>
+
+<body>
+<nav class='navbar navbar-inverse navbar-static-top'>
+    <div class='container'>
+        <div class='container-fluid'>
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class='navbar-header'>
+                <button type='button'
+                        class='navbar-toggle collapsed'
+                        data-toggle='collapse'
+                        data-target='#navbar-collapse-1'
+                        aria-expanded='false'>
+                    <span class='sr-only'>Toggle navigation</span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                </button>
+                <a class='navbar-brand' href='index.html'>[SAND] That's No Tornado</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class='collapse navbar-collapse' id='navbar-collapse-1'>
+                <ul class='nav navbar-nav navbar-left'>
+                    <li><a href='calendar.html'>Events</a></li>
+                    <li><a href='social.html'>Social</a></li>
+                </ul>
+                <ul class='nav navbar-nav navbar-right'>
+                    <li><a href='dry-top-guide.html'>New to Dry Top?</a></li>
+                    <li><a href='about-us.html'>About the Guild</a></li>
+                    <li><a href='leadership.html'>Guild Leadership</a></li>
+                    <li><a href='recruitment.html'>Guild Recruitment</a></li>
+                    <li class='dropdown'>
+                        <a href='#' class='dropdown-toggle'
+                           data-toggle='dropdown'
+                           role='button'
+                           aria-haspopup='true' aria-expanded='false'>Site Info <span class='caret'></span></a>
+                        <ul class='dropdown-menu'>
+                            <li><a href='http://goo.gl/forms/6ndcBX7EYC'>Site Feedback</a></li>
+                            <li><a href='https://github.com/DryTopSAND'>Contribute Updates</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> <!-- /.navbar-collapse -->
+        </div> <!-- /.container-fluid -->
+    </div>
+</nav>
+
+<canvas id="canvas" style="display: block; position: absolute;"></canvas>
+<div class='container'>
+    <div class='col-xs-12 text-center'>
+        <h2>☃️ Wintersday Raffle ☃️</h2>
+    </div>
+    <center><p>
+        Happy Wintersday, everyone! It’s that time of year again where we collect warm mugs of buttered spirits, creamy cups of eggnog, and steins of spiced apple cider and enjoy the final days of the year before a new one begins. This year, ArenaNet added in a few new Wintersday decorations for us to enjoy, and we still have room for so many more older decorations to be made! In celebration of this most festive time of year, [SAND] is continuing its tradition of a Wintersday Raffle. We hope you enjoy the fresh snow, the wintry chiming of bells, and these specially-themed prizes!
+	</p>
+	<p>
+		<b>Grand Prize</b>: <a href="https://wiki.guildwars2.com/wiki/Cozy_Wintersday_Mounts_Pack">Cozy Wintersday Mounts Pack</a> + any giftable 400 Gem item or items amounting to 400 Gems + 250 Wintersday Presents
+	</p>
+	<p>
+		Second Place Prize: Your choice of either the <a href="https://wiki.guildwars2.com/wiki/Fancy_Winter_Outfit">Fancy Winter Outfit</a>, <a href="https://wiki.guildwars2.com/wiki/Ice_Encasement_Outfit">Ice Encasement Outfit</a>, <a href="https://wiki.guildwars2.com/wiki/Dwayna%27s_Regalia_Outfit">Dwayna’s Regalia Outfit</a>, or <a href="https://wiki.guildwars2.com/wiki/Grenth%27s_Regalia_Outfit">Grenth’s Regalia Outfit</a> + 250 Wintersday Presents
+	</p>
+	<p>
+		Third Place Prize: Your choice of a <a href="https://wiki.guildwars2.com/wiki/Mini_Festive_Aurene">Mini Festive Aurene</a>, <a href="https://wiki.guildwars2.com/wiki/Ice_Crown">Ice Crown</a>, or <a href="https://wiki.guildwars2.com/wiki/Shoulder_Scarf">Shoulder Scarf</a> + 100 Wintersday Presents
+	</p>
+	<p>
+		Fourth Place Prize: <a href="https://wiki.guildwars2.com/wiki/Festive_Hat">A Festive Hat</a> + 50 Wintersday Presents
+	</p>
+	<p>
+		Fifth Place Prize: <a href="https://wiki.guildwars2.com/wiki/Celestial_Dye">Celestial Dye</a> + <a href="https://wiki.guildwars2.com/wiki/Glint%27s_Sanctuary_Dye">Glint’s Sanctuary Dye</a> + 25 Wintersday Presents
+	</p>
+	<p>
+		In addition to the main prizes, 10 entrants will be randomly selected to win <a href="https://wiki.guildwars2.com/wiki/Wintersday_Earmuffs">Wintersday Earmuffs</a>! 
+	</p>
+	<p>
+		🎅🤶👪🍪🥛🦌❄️☃️🎄🎁🔔🎶
+	</p>
+	<hr>
+	<p>
+		What you need to know:
+	</p></center>
+	<ul style="padding-top:2px; margin-left: 2.5%; margin-right: 2.5%;">
+		<li>Each <b>Snow Pile</b> is purchasable for <b>100</b> Snowflakes from the Guild Decoration Vendor in our Guild Hall, located near the Guild Bank. Each <b>Snow Mound</b> is purchasable from the same vendor for <b>250 Snowflakes. 1 Snow Pile = 1 Raffle Ticket. 1 Snow Mound = 2 Raffle Tickets.</b></li>
+		<li>If you donated any Snow Piles or Snow Mounds before the raffle was officially announced, they have been recorded already and will count as entries.</li>
+		<li>We are concentrating on <b>Snow Piles</b>. They are what we need to craft higher tiers of Wintersday decorations, while Snow Mounds are not used for any current Scribe decorations. While you are entirely free to donate Snow Mounds (and they are awesome!), we encourage you to consider using Snowflakes on Snow Piles more often.</li>
+		<li>There is a tracker in place for copying down how many Snow Piles and Snow Mounds have been donated by each person. It checks every 5 minutes and within those 5 minutes can mark down a total of 100 items. While we do not foresee anyone donating more than 100 Snow Piles/Mounds within a span of 5 minutes, we caution you to check for other people donating at the same time as you, and to slow down.</li>
+		<li>Each raffle ticket will be set a numerical value of however many Snow Piles have already been donated. <b>Ex</b>: Moon.6480 was the first to donate, and put in 10 Snow Piles in a row = raffle tickets numbered 1-10. Sand.7850 donated 3 Snow Piles in a row after, numbering them 11-13.</li>
+		<li>The prizes were funded by Moon and other donors. As a general courtesy and out of respect, you are not allowed to change the prize for another item(s) of an equivalent value in Gems unless you already have the prize. You will be required to submit proof that you have it. Winners can also choose to trade their prize to another [SAND] member.</li>
+		<li>Winners of any of the bigger prizes are eligible to win the Wintersday Earmuffs. If you have the Earmuffs already, you are free to trade them to another [SAND] member.</li>
+	</ul>
+	<hr>
+	<p>
+		<b>There is no limit to how many raffle tickets you can purchase. Winners will be randomly selected using a random number generator.</b>
+	</p>
+	<p>
+		<b>This contest officially ends January 1st at 11:59 pm (PST time), which is 7 hours and 59 minutes after reset. This is to ensure we can give out the correct prizes before they are phased out from the Gem Store.</b>
+	</p>
+	<center><div class="xmasTreeCtr"><div class="xmasTree"></div></div></center>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+<script src='js/main.js'></script>
+<script src="js/members.js"></script>
+
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-19228491-3', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
