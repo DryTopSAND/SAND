@@ -12,31 +12,31 @@ var SCREEN_WIDTH = 0,
     rockets = [],
     MAX_PARTICLES = 400,
     colorCode = 0,
-	launchFunc, loopFunc;
-	
+    launchFunc, loopFunc;
+    
 var origSpeed = 20;
 var prevTime;
-	
+    
 // start it
 function startFireworks()
 {
-	particles = [];
-	rockets = [];
-	
+    particles = [];
+    rockets = [];
+    
     canvas = document.getElementById('canvas');
     context = canvas.getContext('2d');
     canvas.width = SCREEN_WIDTH;
     canvas.height = SCREEN_HEIGHT;
     launchFunc = setInterval(launch, 800);
     //loopFunc = setInterval(loop, 1000 / 50);
-	window.requestAnimationFrame(loop);
+    window.requestAnimationFrame(loop);
 }
 
 // stop it
 function stopFireworks()
 {
-	clearInterval(launchFunc);
-	clearInterval(loopFunc);
+    clearInterval(launchFunc);
+    clearInterval(loopFunc);
 }
 
 // update mouse position
@@ -79,14 +79,6 @@ function loop(currentTime) {
     var timeDiff = currentTime - prevTime;
     prevTime = currentTime;
 
-    // update screen size
-    if (SCREEN_WIDTH != $(document).width()) {
-        canvas.width = SCREEN_WIDTH = $(document).width()
-    }
-    if (SCREEN_HEIGHT != $(document).height()) {
-        canvas.height = SCREEN_HEIGHT = $(document).height();
-    }
-
     // clear canvas
     context.fillStyle = "rgba(239, 224, 185, 0.5)";
     context.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -104,8 +96,8 @@ function loop(currentTime) {
         // random chance of 1% if rockets is above the middle
         var randomChance = rockets[i].pos.y < (SCREEN_HEIGHT * 2 / 3) ? (Math.random() * 100 <= 1) : false;
 
-/* Explosion rules
-             - 80% of screen
+        /* Explosion rules
+            - 80% of screen
             - going down
             - close to the mouse
             - 1% chance of random explosion
@@ -137,8 +129,8 @@ function loop(currentTime) {
     while (particles.length > MAX_PARTICLES) {
         particles.shift();
     }
-	
-	window.requestAnimationFrame(loop);
+    
+    window.requestAnimationFrame(loop);
 }
 
 function Particle(pos) {
@@ -195,7 +187,7 @@ Particle.prototype.render = function(c) {
         y = this.pos.y,
         r = this.size / 2;
 
-	var gradient = c.createRadialGradient(x, y, 0.1, x, y, r);
+    var gradient = c.createRadialGradient(x, y, 0.1, x, y, r);
     gradient.addColorStop(0.1, "rgba(255,255,255," + this.alpha + ")");
     gradient.addColorStop(0.8, "hsla(" + this.color + ", 100%, 50%, " + this.alpha + ")");
     gradient.addColorStop(1, "hsla(" + this.color + ", 100%, 50%, 0.1)");
@@ -277,3 +269,16 @@ Rocket.prototype.render = function(c) {
 
     c.restore();
 };
+
+// update screen size
+function resizeCanvas()
+{
+	canvas.width = SCREEN_WIDTH = Math.min(window.innerWidth, $('body').width());
+	canvas.height = SCREEN_HEIGHT = $(document).height();
+}
+
+// setup event handlers
+$(window).on('resize', resizeCanvas);
+$('body').on('DOMSubtreeModified', function() {
+    resizeCanvas()
+});
