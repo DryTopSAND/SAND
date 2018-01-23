@@ -1,6 +1,6 @@
 {
   "name": "DryTopSAND",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A guild site for the Guild Wars 2 guild [SAND] - That's No Tornado",
   "main": "index.html",
   "scripts": {},
@@ -19,7 +19,7 @@
     "bootstrap": "^3.3.6",
     "bower": "^1.7.7",
     "fullcalendar": "^2.6.1",
-    "jquery": "^2.2.2",
+    "jquery": "^3.3.1",
     "jquery-ui-bundle": "^1.11.4",
     "moment": "^2.12.0"
   }

@@ -9,7 +9,7 @@
 <link rel='stylesheet' type='text/css' href='css/main.css'/>
 <link rel="stylesheet" href="css/raffle/pumpkin.css">
 <link rel="stylesheet" href="css/raffle/watable.css">
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script src="js/raffle/WATable/jquery.watable.js"></script>
 <script src="https://momentjs.com/downloads/moment.min.js"></script>
@@ -52,11 +52,11 @@ $(function() {
                 type: 'number',
                 unique: true
             },*/
-			item: {
-				index: 2,
-				type: 'string',
-				unique: false
-			},
+            item: {
+                index: 2,
+                type: 'string',
+                unique: false
+            },
             user: {
                 index: 3,
                 type: 'string',
@@ -76,7 +76,7 @@ $(function() {
             var row = {
                 '#': i + 1,
                 //id: logItem.id,
-				item: get_item(logItem.item_id),
+                item: get_item(logItem.item_id),
                 user: logItem.user,
                 time: moment(logItem.time).format('MMM D YYYY hh:mm:ss a'),
                 'row-cls': 'tblrow'
@@ -95,10 +95,10 @@ $(function() {
 });
 function get_item(id)
 {
-	if (id == 77629)
-		return "Snow Pile";
-	else if (id == 86521)
-		return "Snow Mound";
+    if (id == 77629)
+        return "Snow Pile";
+    else if (id == 86521)
+        return "Snow Mound";
 }
 </script>
 <nav class='navbar navbar-inverse navbar-static-top'>
