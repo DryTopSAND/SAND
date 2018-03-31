@@ -91,6 +91,12 @@ h1.sab-box {
 }
 /* end codepen */
 
+/* Shadow Text */
+
+h1, h2, h3, h4, h5, h6 {
+    text-shadow: 0.1em 0.1em #41200f
+}
+
 .page-header {
     margin: 20px 0 20px;
     border-bottom: 0px;
