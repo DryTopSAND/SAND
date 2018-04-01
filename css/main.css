@@ -60,8 +60,7 @@ body {
 /* Pixel Font and Borders */
 /* Original source: https://codepen.io/albpara/pen/xDBvc/ */
 .sab {
-    margin: 1em;
-    font: 1.4em "Press start 2P";
+    font: 1em "Press start 2P";
     font-weight: 100;
     line-height: 200%;
 }
@@ -93,7 +92,13 @@ h1.sab-box {
 
 /* Shadow Text */
 
-h1, h2, h3, h4, h5, h6 {
+.sab h1,
+.sab h2,
+.sab h3,
+.sab h4,
+.sab h5,
+.sab h6
+{
     text-shadow: 0.1em 0.1em #41200f
 }
 
