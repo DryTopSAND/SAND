@@ -12,136 +12,8 @@
     <meta name='keywords' content='GW2,Guild Wars 2,Dry Top,SAND,guild'>
 
     <link rel='stylesheet' type='text/css' href='css/main.css'/>
-    <style>
-        @import url(https://fonts.googleapis.com/css?family=Droid+Sans:400,700);
-
-        * { padding: 0; margin: 0; }
-
-        html, body {
-            overflow: hidden;
-            background-color: #000;
-        }
-        
-        .sw
-        {
-            font-family: "Droid Sans", arial, verdana, sans-serif;
-            font-weight: 700;
-            color: #ff6;
-            height: 100%;
-            background-color: #000;
-            position: absolute;
-            width: 100%;
-            top: 0;
-        }
-
-        p#start
-        {
-            position: relative;
-            width: 16em;
-            font-size: 200%;
-            font-weight: 400;
-            margin: 20% auto;
-            color: #4ee;
-            opacity: 0;
-            z-index: 1;
-            animation: intro 2s ease-out;
-        }
-
-        @keyframes intro {
-            0% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        h1
-        {
-            position: absolute;
-            width: 3.8em;
-            left: 50%;
-            top: 30%;
-            font-weight: 900;
-            font-size: 10em;
-            line-height: 0.8em;
-            letter-spacing: -0.05em;
-            color: #000;
-            text-shadow: -2px -2px 0 #ff6, 2px -2px 0 #ff6, -2px 2px 0 #ff6, 2px 2px 0 #ff6;
-            opacity: 0;
-            z-index: 1;
-            animation: logo 5s ease-out 2.5s;
-        }
-
-        h1 sub
-        {
-            display: block;
-            font-size: 0.3em;
-            letter-spacing: 0;
-            line-height: 0.8em;
-        }
-
-        @keyframes logo {
-            0% { transform: translate(-50%, 0) scale(1); opacity: 1; }
-            50% { opacity: 1; }
-            100% { transform: translate(-50%, 0) scale(0.1); opacity: 0; }
-        }
-
-        #titles
-        {
-            position: absolute;
-            width: 18em;
-            height: 50em;
-            bottom: 0;
-            left: 50%;
-            margin-left: -9em;
-            font-size: 350%;
-            text-align: justify;
-            overflow: hidden;
-            transform-origin: 50% 100%;
-            transform: perspective(300px) rotateX(22.5deg);
-        }
-
-        #titles:after
-        {
-            position: absolute;
-            content: ' ';
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 60%;
-            background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
-            pointer-events: none;
-        }
-
-        #titles p
-        {
-            text-align: justify;
-            margin: 0.8em 0;
-        }
-
-        #titles p.center
-        {
-            text-align: center;
-        }
-
-        #titles a
-        {
-            color: #ff6;
-            text-decoration: underline;
-        }
-
-        #titlecontent
-        {
-            position: absolute;
-            top: 100%;
-            animation: scroll 160s linear 4s infinite;
-        }
-
-        /* animation */
-        @keyframes scroll {
-            0% { top: 100%; }
-            100% { top: -170%; }
-        }
-    </style>
 </head>
+
 <body>
 <nav class='navbar navbar-inverse navbar-static-top'>
     <div class='container'>
@@ -187,29 +59,42 @@
         </div> <!-- /.container-fluid -->
     </div>
 </nav>
-<br><br><br>
-<div class="sw">
-<p id="start">A short time ago in a galaxy far, far away...</p>
 
-<h1>DRY TOP [SAND]</h1>
+<canvas id="canvas" style="display:block;position:absolute;top:0;left:0;"></canvas>
 
-<div id="titles">
-  <div id="titlecontent">
+<div class='container'>
+    <div class='col-xs-12 text-center'>
+        <h2>About [SAND]</h2>
+    </div>
 
-    <p class="center">Episode IX<br>THAT'S NO TORNADO</p>   
-
-    <p>[SAND] was founded on July 21st, 2015 by Muirellthe Moon when a few players mentioned it as a possibility after semi-organized T5 maps over the course of several days. In the months since [SAND]'s official launch as a Dry-Top centric guild, it has grown into a diverse community of <span id="member-count"></span> members with a wide range of interests. With involved leadership and members alike, we continue to excel in bringing a fun and engaging atmosphere to Dry Top.</p>
-
-    <p>Our Goal: We believe in bringing a friendly, initiative-driven approach to Dry Top every time we come out. We believe in the inherent nature of Dry Top itself: success through teamwork, communication, and coordination of everyone involved on the map. [SAND] has many experienced and knowledgeable members, and we're not only here to help lead and organize Dry Top Tier 6 maps, but to provide help with achievements and any questions newcomers may have.</p>
-
-    <p>We're not here to make Dry Top a job for anyone. With that in mind, we operate through kind volunteers, communication, and involvement from players both in and out of [SAND] for event circuits and coordination. If you're ever inclined to help, say so in map chat or feel free to PM one of the leaders on the map! Letting the map know about events that are completed or that need help is also a great help to the smooth success of Dry Top.</p>
-
-    <p>Remember - your contributions, big or small, go a long way to bringing the map to another successful Tier 6. No matter which event you do or what you feel comfortable doing, you're bringing everyone one step closer to a productive Tier 6 sandstorm.</p>
-
-  </div>
+    <p>
+        [SAND] was founded on July 21st, 2015 by Muirellthe Moon when a few players mentioned it as a possibility
+        after semi-organized T5 maps over the course of several days. In the months since [SAND]'s official launch as a
+        Dry-Top centric guild, it has grown into a diverse community of <span id="member-count"></span> members with
+        a wide range of interests. With involved leadership and members alike, we continue to excel in bringing a fun
+        and engaging atmosphere to Dry Top.
+    </p>
+    <p>
+        <strong>Our Goal</strong>: We believe in bringing a friendly, initiative-driven approach to Dry Top every time
+        we come out. We believe in the inherent nature of Dry Top itself: success through teamwork, communication, and
+        coordination of everyone involved on the map. [SAND] has many experienced and knowledgeable members, and we're
+        not only here to help lead and organize Dry Top Tier 6 maps, but to provide help with achievements and any
+        questions newcomers may have.
+    </p>
+    <p>
+        We're not here to make Dry Top a job for anyone. With that in mind, we operate through kind volunteers,
+        communication, and involvement from players both in and out of [SAND] for event circuits and coordination.
+        If you're ever inclined to help, say so in map chat or feel free to PM one of the leaders on the map! Letting
+        the map know about events that are completed or that need help is also a great help to the smooth success of
+        Dry Top.
+    </p>
+    <p>
+        Remember - your contributions, big or small, go a long way to bringing the map to another successful Tier 6.
+        No matter which event you do or what you feel comfortable doing, you're bringing everyone one step closer to a
+        productive Tier 6 sandstorm.
+    </p>
 </div>
 
-</div>
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -223,19 +108,25 @@
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
 
-<script src='../js/main.js'></script>
-<script src="../js/members.js"></script>
+<script src='js/main.js'></script>
+<script src="js/members.js"></script>
 
 <script>
-var audio = new Audio('audio/sw.m4a');
-setTimeout(function() { audio.play(); }, 2300);
-if ($('.sw').height() > 720)
-    $('.sw').height(720);
-else {
-    var width = $('.sw').width();
-    var scale = width / 1080;
-    $('.sw').css('transform', 'scale(' + scale + ')');
-}
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-19228491-3', 'auto');
+  ga('send', 'pageview');
+
 </script>
 </body>
 </html>
