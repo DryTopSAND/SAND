@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <title>[SAND] Birthday Party</title>
+
+    <link rel='icon' href='favicon.ico' sizes='16x16 32x32' type='image/png'>
+    <meta name='description' content="A website for information on the Guild Wars 2 guild [SAND] - That's No Tornado">
+    <meta name='keywords' content='GW2,Guild Wars 2,Dry Top,SAND,guild'>
+
+	<link href='https://fonts.googleapis.com/css?family=Wendy+One' rel='stylesheet' type='text/css'>
+	
+	<link rel='stylesheet' type='text/css' href='css/main.css'/>
+	<link rel='stylesheet' type='text/css' href='css/birthday/confetti.css'/>
+	<link rel='stylesheet' type='text/css' href='css/birthday/blaster.css'/>
+	<link rel='stylesheet' type='text/css' href='css/birthday/balloons.css'/>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
+	<script src="js/birthday/plugin.js"></script>
+
+	<style>
+		body { margin-bottom: 10px; }
+		h2 { margin-top: 0; }
+		.container { line-height: 133%; }
+		.dashed { list-style-type: none; }
+		.dashed > li:before { content: "- "; }
+		.dashed > li { margin: 10px 0 0 -15px; font-style: italic; }
+	</style>
+</head>
+
+<body>
+<canvas id="canvas"></canvas>
+<nav class='navbar navbar-inverse navbar-static-top'>
+    <div class='container'>
+        <div class='container-fluid'>
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class='navbar-header'>
+                <button type='button'
+                        class='navbar-toggle collapsed'
+                        data-toggle='collapse'
+                        data-target='#navbar-collapse-1'
+                        aria-expanded='false'>
+                    <span class='sr-only'>Toggle navigation</span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                </button>
+                <a class='navbar-brand' href='index.html'>[SAND] That's No Tornado</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class='collapse navbar-collapse' id='navbar-collapse-1'>
+                <ul class='nav navbar-nav navbar-left'>
+                    <li><a href='calendar.html'>Events</a></li>
+                    <li><a href='social.html'>Social</a></li>
+                </ul>
+                <ul class='nav navbar-nav navbar-right'>
+                    <li><a href='dry-top-guide.html'>New to Dry Top?</a></li>
+                    <li><a href='about-us.html'>About the Guild</a></li>
+                    <li><a href='leadership.html'>Guild Leadership</a></li>
+                    <li><a href='recruitment.html'>Guild Recruitment</a></li>
+                    <li class='dropdown'>
+                        <a href='#' class='dropdown-toggle'
+                           data-toggle='dropdown'
+                           role='button'
+                           aria-haspopup='true' aria-expanded='false'>Site Info <span class='caret'></span></a>
+                        <ul class='dropdown-menu'>
+                            <li><a href='http://goo.gl/forms/6ndcBX7EYC'>Site Feedback</a></li>
+                            <li><a href='https://github.com/DryTopSAND'>Contribute Updates</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> <!-- /.navbar-collapse -->
+        </div> <!-- /.container-fluid -->
+    </div>
+</nav>
+
+<div class='container'>
+
+	<div class="balloon-container">
+	  <div class="balloon">
+		<div><span>☺</span></div>
+		<div><span>B</span></div>
+		<div><span>D</span></div>
+		<div><span>A</span></div>
+		<div><span>Y</span></div>
+		<div><span>!</span></div>
+	  </div>
+	</div>
+
+    <div class='col-xs-12 text-center'>
+        <h2>Spoiler Policy</h2>
+    </div>
+	<p>
+		Hey folks! This is a page that has been created in order to clearly state and explain what we consider to be spoilers regarding new living story content and expansions in our guild chat. <b>This is our policy.</b> It has been set in place and is expected to be adhered to and respected. <b>Our guild chat is not your battleground to debate our policies.</b> Please respect your fellow guild members and leadership by properly voicing your concerns: please speak to Moon or an officer, or email <a href="mailto:muirellthemoon@gmail.com">muirellthemoon@gmail.com</a> in order to voice your thoughts.
+	</p>
+	<hr style="border-top-color:#d2be96;">
+	<ul>
+		<li><b>Any leaks are considered spoilers until made official by ArenaNet. This includes new locations and elite specializations.</b></li>
+	</ul>
+	<h3>Off-limits in guild chat for 2 weeks after a story or expansion drop:</h3>
+	<ul>
+		<li>Anyone, anywhere, and anything that is tied to the new story plot. This includes minis, new items, and POI's that would result in tipping off members to a plot revelation or new character that they would not have been aware of before.</li>
+		<li>Theories about where the story will go after the most recent story installment.</li>
+		<li>Achievements related to the plot or characters that would result in tipping off members to a plot revelation or new character that they would not have been aware of before.</li>
+		<li>Events related to the plot or characters that would result in tipping off members to a plot revelation or new character that they would not have been aware of before.</li>
+		<ul class="dashed">
+			<li>Please note that Waypoints are unavoidable ways for members and friends to get to each other for various reasons. They are not restricted.</li>
+			<li>The name of the new map(s) that become available with new story content are unavoidable and fully visible via the guild panel, the friends list, and the LFG tabs. The name itself is not restricted.</li>
+		</ul>
+	</ul>
+	<p style="margin-top:20px;">
+		We understand that there are diverse perspectives about spoilers in the [SAND] community. Spoilers have been a contentious subject for us. The responsibility of our leadership is to balance out the pros and cons and to make it as fair and comfortable as possible for not just one, but everyone in our SANDie home. We have an active Discord with a Spoilers tab; it is the third text channel, right underneath &quot;random.&quot; We implore members to make use of this channel, the private voice channels, and squad/party/whisper chat in-game. If you have not been in Discord yet, please let Moon or an officer know, and they will get you a link and change your role to [SAND] as soon as they can!
+	</p>
+	<p style="text-align: center; font-size: 30pt; padding-top: 40px; padding-bottom: 40px;">
+	🎂🍰🎈🎁🎂🍰🎈🎁🎂🍰🎈🎁
+	</p>
+</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+		
+<script src="js/birthday/confetti.js"></script>
+<script src="js/birthday/blaster.js"></script>
+
+<!--<script>
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-19228491-3', 'auto');
+  ga('send', 'pageview');
+</script>-->
+</body>
+</html>
