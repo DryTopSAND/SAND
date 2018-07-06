@@ -62,7 +62,7 @@ var ConfettiCannon = function () {
 
         this.setupListeners();
         this.setCanvasSize();
-		this.first = true;
+        this.first = true;
 
         // fire off for a demo
         this.timer = setTimeout(this.handleMouseup, 1000);
@@ -122,34 +122,32 @@ var ConfettiCannon = function () {
         key: 'handleMouseup',
         value: function handleMouseup(event) {
             this.drawVector = false;
-			if (this.first)
-				this.first = false;
+            if (this.first)
+                this.first = false;
 
             var x0 = this.vector[0].x;
             var y0 = this.vector[0].y;
             var x1 = this.vector[1].x;
             var y1 = this.vector[1].y;
-			
-			console.log(x0 + ',' + y0 + ',' + x1 + ',' + y1);
-
+            
             var length = getLength(x0, y0, x1, y1);
             var angle = getDegAngle(x0, y0, x1, y1) + 180;
 
             var particles = length / 5 + 5;
             var velocity = length * 10;
             this.addConfettiParticles(particles, angle, velocity, x0, y0);
-			this.playSound();
+            this.playSound();
         }
     }, {
         key: 'handleMousemove',
         value: function handleMousemove(event) {
-			var x = event.clientX * this.dpr;
+            var x = event.clientX * this.dpr;
             var y = (window.scrollY + event.clientY) * this.dpr;
             if (this.first)
-			{
-				this.pointer = { x: x, y: y };
-				return;
-			}
+            {
+                this.pointer = { x: x, y: y };
+                return;
+            }
             this.vector[1] = {
                 x: x,
                 y: y
@@ -328,8 +326,8 @@ var ConfettiCannon = function () {
         key: 'render',
         value: function render() {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-			
-			Draw();
+            
+            Draw();
 
             // only draw the vector when the drawVector flag is on
             this.drawVector && this.drawVectorLine();
@@ -339,12 +337,12 @@ var ConfettiCannon = function () {
             this.drawConfetti();
         }
     }, {
-		key: 'playSound',
-		value: function playSound() {
-			var audio = new Audio('audio/birthday/blaster' + getRandomInt(1, 4) + '.mp3'); 
-			audio.play();
-	   }
-	}]);
+        key: 'playSound',
+        value: function playSound() {
+            var audio = new Audio('audio/birthday/blaster' + getRandomInt(1, 4) + '.mp3'); 
+            audio.play();
+       }
+    }]);
 
     return ConfettiCannon;
 }();

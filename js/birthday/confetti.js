@@ -107,5 +107,5 @@ function resizeCanvas(reinit) {
 }
 
 $(document).ready(function() {
-	resizeCanvas();
+    resizeCanvas();
 });
