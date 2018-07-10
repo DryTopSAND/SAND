@@ -1,4 +1,4 @@
-span {
+.balloon span {
   text-transform: uppercase;
 }
 .balloon-container {
@@ -107,7 +107,7 @@ span {
   content: "▲";
   font-size: 1em;
 }
-span {
+.balloon span {
   font-size: 4.8em;
   color: white;
   position: relative;
@@ -263,7 +263,7 @@ span {
     transform: translate(-15px, 10px) rotate(10deg);
   }
 }
-h1 {
+.balloon h1 {
   position: relative;
   top: 200px;
   text-align: center;
