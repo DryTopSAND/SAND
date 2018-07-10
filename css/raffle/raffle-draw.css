@@ -138,3 +138,8 @@ canvas {
   left: 0;
   top: 0;
 }
+.coin
+{
+    padding-left: 4px;
+    padding-right: 6px;
+}
