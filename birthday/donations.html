@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAND - Birthday Donations</title>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/raffle/pumpkin.css">
+<link rel="stylesheet" href="../css/raffle/watable.css">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="../js/raffle/WATable/jquery.watable.js"></script>
+<script src="https://momentjs.com/downloads/moment.min.js"></script>
+</head>
+<body>
+<script>
+var users = {};
+$(function() {
+
+    // fetch the transaction history from a remote server
+    $.getJSON("http://167.114.130.199/SAND/birthday-log.json", function(logItems) {
+        
+        // calculate totals
+        $.each(logItems, function(i, logItem) {
+            if ((logItem.operation == 'deposit' || logItem.operation == 'withdraw') && logItem.coins != 0) {
+                var user = logItem.user;
+                var coins = logItem.coins;
+                if (logItem.operation != 'deposit')
+                    coins *= -1;
+                if (user in users)
+                    users[user] += coins;
+                else
+                    users[user] = coins;
+            }
+        });
+
+        var html = '';
+        $.each(users, function(idx, val) {
+            html += idx + ' = ' + getCoins(val) + '<br>';
+        });
+        $('#total').html(html);
+        
+        // build the log table
+        var cols = {
+            '#': {
+                index: 1,
+                type: 'number',
+                unique: true,
+                sortOrder: 'desc'
+            },
+            id: {
+                index: 2,
+                type: 'number',
+                unique: true
+            },
+            type: {
+                index: 4,
+                type: 'string',
+                unique: false
+            },
+            user: {
+                index: 3,
+                type: 'string',
+                unique: false
+            },
+            amount: {
+                index: 5,
+                type: 'string',
+                unique: false
+            },
+            time: {
+                index: 5,
+                type: 'string',
+                unique: false
+            }           
+        };
+        // reformat data
+        var rows = [];
+        for (var i = 0; i < logItems.length; i++)
+        {
+            var logItem = logItems[logItems.length - 1 - i];
+            var amount = logItem.coins;
+            var row = {
+                '#': i + 1,
+                id: logItem.id,
+                type: logItem.operation,
+                user: logItem.user,
+                amount: getCoins(amount),
+                time: moment(logItem.time).format('MMM D YYYY hh:mm:ss a'),
+                'row-cls': 'tblrow'
+            };
+            
+            rows.push(row);
+        }
+        var data = {
+            cols: cols,
+            rows: rows
+        };
+        $('#log').WATable({
+            data: data,
+            pageSize: 20
+        });
+    });
+});
+
+function getCoins(amount)
+{
+    var gold = 0;
+    var silver = 0;
+    var copper = 0;
+    
+    if (amount >= 10000)
+    {
+        gold = Math.floor(amount / 10000);
+        amount = Math.floor(amount % 10000);
+    }
+    
+    if (amount >= 100)
+    {
+        silver = Math.floor(amount / 100);
+        amount = Math.floor(amount % 100);
+    }
+    
+    copper = amount;
+    
+    var coinStr = "";
+    if (gold > 0) coinStr += gold + "<img src=\"../images/gold-coin.png\" class=\"coin\">";
+    if (silver > 0) coinStr += silver + "<img src=\"../images/silver-coin.png\" class=\"coin\">";
+    if (copper > 0) coinStr += copper + "<img src=\"../images/copper-coin.png\" class=\"coin\">";
+    
+    return coinStr;
+}
+</script>
+<h3>[SAND] Birthday Donations</h3>
+<div id="total"></div>
+<div id="log"></div>
+</body>
+</html>
