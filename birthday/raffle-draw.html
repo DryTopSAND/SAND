@@ -22,7 +22,7 @@
     var participants = {};
     var tickets = [];
     var audio;
-	var perTicket = 10000;
+    var perTicket = 200000;
     $(function() {
 
         // fetch the transaction history from a remote server
@@ -59,6 +59,12 @@
         var users = {};
         $.each(logItems, function(i, logItem) {
             if ((logItem.operation == 'deposit' || logItem.operation == 'withdraw') && logItem.coins != 0) {
+
+            // exclude
+                var time = new Date(logItem.time);
+                if (time.getTime() < 1531291780000) return;
+                if (logItem.id == 398966) return;
+
                 var user = logItem.user;
                 var coins = logItem.coins;
                 if (logItem.operation != 'deposit')
@@ -70,8 +76,8 @@
             }
         });
         
-		users = prune(users);
-		sort(logItems);
+        users = prune(users);
+        sort(logItems);
         
         return users;
     }
@@ -146,34 +152,45 @@
         // get all users who have contributed the item
         var users = {};
         var tickets = [];
-		var userTickets = {};
+        var userTickets = {};
         $.each(logItems, function(i, logItem) {
             if ((logItem.operation == 'deposit' || logItem.operation == 'withdraw') && logItem.coins != 0) {
+
+                // exclude
                 var user = logItem.user;
                 if (!(user in participants)) return;
-				var coins = logItem.coins;
+                var time = new Date(logItem.time);
+                if (time.getTime() < 1531291780000) return;
+                if (logItem.id == 398966) return;
+
+                var coins = logItem.coins;
                 if (logItem.operation != 'deposit')
                     coins *= -1;
                 
-				if (user in users)
-					users[user] += coins;
+                if (user in users)
+                    users[user] += coins;
                 else
-				{
-					users[user] = coins;
-					userTickets[user] = 0;
-				}
+                {
+                    users[user] = coins;
+                    userTickets[user] = 0;
+                }
 
                 // does this constitute a raffle ticket?
-				var prevTickets = userTickets[user];
-				var currTickets = Math.floor(users[user] / perTicket);
-				if (currTickets > prevTickets)		// won't handle withdrawls correctly, but shouldn't affect most users
-				{
-					var addTickets = currTickets - prevTickets;
-					for (var i = 0; i < addTickets; i++)
-						tickets.push(logItem);
-						
-					userTickets[user] = currTickets;
-				}
+                var prevTickets = userTickets[user];
+                var currTickets = Math.floor(users[user] / perTicket);
+                
+                // ticket cap
+                if (currTickets > 10)
+                    currTickets = 10;
+                
+                if (currTickets > prevTickets)      // won't handle withdrawls correctly, but shouldn't affect most users
+                {
+                    var addTickets = currTickets - prevTickets;
+                    for (var i = 0; i < addTickets; i++)
+                        tickets.push(logItem);
+                        
+                    userTickets[user] = currTickets;
+                }
             }
         });
         return tickets;
@@ -204,11 +221,11 @@
                 type: 'string',
                 unique: false
             },
-			amount: {
-				index: 4,
-				type: 'string',
-				unique: false
-			},
+            amount: {
+                index: 4,
+                type: 'string',
+                unique: false
+            },
             time: {
                 index: 5,
                 type: 'string',
@@ -225,7 +242,7 @@
                 '#': i + 1,
                 id: logItem.id,
                 user: logItem.user,
-				amount: getCoins(perTicket),
+                amount: getCoins(perTicket),
                 time: moment(logItem.time).format('MMM D YYYY hh:mm:ss a')
             };
             rows.push(row);
@@ -245,22 +262,22 @@
      * @param {Array} log the logged items to sort
      */
     function sort(log) {
-	
+    
         // items are listed newest entries first by default
         // reverse so that oldest entries are first
         return log.reverse();
     }
-	
-	function prune(users)
-	{
+    
+    function prune(users)
+    {
         var newUsers = {};
-		
-		$.each(users, function(idx, val) {
+        
+        $.each(users, function(idx, val) {
             if (val >= perTicket)
-				newUsers[idx] = val;
+                newUsers[idx] = val;
         });
-		return newUsers;
-	}
+        return newUsers;
+    }
 
     /**
      * Selects a random ticket
@@ -320,8 +337,8 @@
 
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-	
-	function getCoins(amount)
+    
+    function getCoins(amount)
 {
     var gold = 0;
     var silver = 0;

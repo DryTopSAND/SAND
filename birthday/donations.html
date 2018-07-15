@@ -16,6 +16,7 @@
 <body>
 <script>
 var users = {};
+var deposits = [];
 $(function() {
 
     // fetch the transaction history from a remote server
@@ -24,6 +25,13 @@ $(function() {
         // calculate totals
         $.each(logItems, function(i, logItem) {
             if ((logItem.operation == 'deposit' || logItem.operation == 'withdraw') && logItem.coins != 0) {
+                
+                // exclude
+                var time = new Date(logItem.time);
+                if (time.getTime() < 1531291780000) return;
+                if (logItem.id == 398966) return;
+                
+                deposits.push(logItem);
                 var user = logItem.user;
                 var coins = logItem.coins;
                 if (logItem.operation != 'deposit')
@@ -77,9 +85,9 @@ $(function() {
         };
         // reformat data
         var rows = [];
-        for (var i = 0; i < logItems.length; i++)
+        for (var i = 0; i < deposits.length; i++)
         {
-            var logItem = logItems[logItems.length - 1 - i];
+            var logItem = deposits[deposits.length - 1 - i];
             var amount = logItem.coins;
             var row = {
                 '#': i + 1,
