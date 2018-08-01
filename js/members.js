@@ -7,7 +7,7 @@ var commonName = function(name) {
     'trumpetman.3028': 'Stel Edelweiss',
     'glehmann.9586': 'Victoria Arcwright',
     'Irrell.3524': '',
-    'Peregrinari.5906': 'Ciannali',
+    //'Peregrinari.5906': 'Ciannali',
     'Finix.8672': 'Allisandra',
     'Kolya.8032': 'Kolya Mistiyani',
     'Aeraki Baer.5238': 'Sand Panda Commanda',
@@ -16,8 +16,9 @@ var commonName = function(name) {
     // 'ArcticRose.5280': 'Rosie Arrow',
     // 'Caliber.9237': 'Major Caliber',
     'Arithmancer.5307': 'Dancira',
-	'briana.3092': 'Kenwynna',
-	'gmriggs.4628': 'L Cifarelli'
+    'briana.3092': 'Kenwynna',
+    'gmriggs.4628': 'L Cifarelli',
+    'El Quia.1397': 'Oriana Lai'
   };
 
   return accounts[name] ? accounts[name] : '';
