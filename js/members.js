@@ -11,7 +11,7 @@ var commonName = function(name) {
     'Finix.8672': 'Allisandra',
     'Kolya.8032': 'Kolya Mistiyani',
     'Aeraki Baer.5238': 'Sand Panda Commanda',
-    'PwnedbyJuice.9738': 'Amesart Wolfe',
+    'PwnedbyJuice.9738': 'Athena Graylight',
     // 'memattm.1469': 'Eldrazzi',
     // 'ArcticRose.5280': 'Rosie Arrow',
     // 'Caliber.9237': 'Major Caliber',
