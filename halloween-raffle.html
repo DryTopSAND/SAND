@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <title>[SAND] Halloween Raffle</title>
+
+    <link rel='icon' href='favicon.ico' sizes='16x16 32x32' type='image/png'>
+    <meta name='description' content="A website for information on the Guild Wars 2 guild [SAND] - That's No Tornado">
+    <meta name='keywords' content='GW2,Guild Wars 2,Dry Top,SAND,guild'>
+
+    <link rel='stylesheet' type='text/css' href='css/main.css'/>
+    <link rel='stylesheet' type='text/css' href='css/pumpkin.css'/>
+</head>
+<style>
+body
+{
+    line-height: 130%;
+}
+.main-page
+{
+    max-width: 723px;
+}
+.icon
+{
+    max-width: 55px;
+    max-height: 55px;
+    padding-left: 6px;
+    padding-right: 7px;
+    padding-bottom: 1px;
+}
+.spacer
+{
+    padding-top: 60px;
+}
+.shift
+{
+    margin-left: -80px;
+}
+@media (max-width: 991px) { 
+    .col-md-4
+    {
+        margin-top: 10px;
+    }
+    .spacer
+    {
+        padding-top: 30px;
+    }
+    .shift
+    {
+        margin-left: 0px;
+    }
+}
+</style>
+
+<body>
+<nav class='navbar navbar-inverse navbar-static-top'>
+    <div class='container'>
+        <div class='container-fluid'>
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class='navbar-header'>
+                <button type='button'
+                        class='navbar-toggle collapsed'
+                        data-toggle='collapse'
+                        data-target='#navbar-collapse-1'
+                        aria-expanded='false'>
+                    <span class='sr-only'>Toggle navigation</span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                </button>
+                <a class='navbar-brand' href='index.html'>[SAND] That's No Tornado</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class='collapse navbar-collapse' id='navbar-collapse-1'>
+                <ul class='nav navbar-nav navbar-left'>
+                    <li><a href='calendar.html'>Events</a></li>
+                    <li><a href='social.html'>Social</a></li>
+                </ul>
+                <ul class='nav navbar-nav navbar-right'>
+                    <li><a href='dry-top-guide.html'>New to Dry Top?</a></li>
+                    <li><a href='about-us.html'>About the Guild</a></li>
+                    <li><a href='leadership.html'>Guild Leadership</a></li>
+                    <li><a href='recruitment.html'>Guild Recruitment</a></li>
+                    <li class='dropdown'>
+                        <a href='#' class='dropdown-toggle'
+                           data-toggle='dropdown'
+                           role='button'
+                           aria-haspopup='true' aria-expanded='false'>Site Info <span class='caret'></span></a>
+                        <ul class='dropdown-menu'>
+                            <li><a href='http://goo.gl/forms/6ndcBX7EYC'>Site Feedback</a></li>
+                            <li><a href='https://github.com/DryTopSAND'>Contribute Updates</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> <!-- /.navbar-collapse -->
+        </div> <!-- /.container-fluid -->
+    </div>
+</nav>
+
+<canvas id="canvas" style="display: block; position: absolute;"></canvas>
+<div class='container main-page'>
+    <div class='col-xs-12 text-center' style='margin-top: -5px;'>
+        <h2>Happy Halloween, SANDies!</h2>
+    </div>
+    <p class="text-center">🎃🎃🎃🎃🎃🎃🎃🎃🎃🎃</p>
+    <p style='padding-bottom:5px;'>
+        It's tradition for us to celebrate spo0oky times with a raffle, and this ghoulish year is no different! We hope that this raffle will provide some extra excitement along with the usual in-game activities. This year, everyone has a chance at three prizes through a random draw!
+    </p>
+    <div class='shift'>
+    <div class='col-md-4 text-center' style='font-weight: bold; font-size: 14pt; padding-top: 10px;'>
+        <img src='images/gem.png' class='icon'>1,000 Gems
+    </div>
+    <div class='col-md-4 text-center' style='font-weight: bold; font-size: 14pt; padding-top: 10px;'>
+        <img src='images/gem.png' class='icon'>1,000 Gems
+    </div>
+    <div class='col-md-4 text-center' style='font-weight: bold; font-size: 14pt; white-space: nowrap;'>
+        <img src='images/energizer.png' class='icon'>The Energizer &amp; 50 gold<img src='images/gold-coin.png' class='icon'>
+    </div>
+    </div>
+    <p class='text-center spacer' style='font-weight: bold; font-size: 16px;'>
+        1 Raffle Ticket = 1 Pumpkin decoration donation
+    </p>
+    <p>
+        Pumpkins are 100 Candy Corn each at the Guild decoration vendor inside of our Guild Hall. We have a tracker set up using using the API system that will automatically record the amount of Pumpkins donated by each member that scans each minute. Due to the easy manner in which Candy Corn can be farmed, there is NO limit on how many raffle tickets you can have! If you donate Pumpkins but would like to opt out of the raffle for whatever reason, please notify Moon or L Cifarelli so that they can remove your name. You may only win <u>1 prize</u>. The Gem prize winners will be selected first. 
+    </p>
+    <ul>
+        <li>The Gem prizes will be redeemed through a request system. They will be used by gifting the items requested from the Gem Store.</li>
+        <li>Winners will be chosen through a Random Number Generator that uses the API system tracker. As a result, there is no need to notify Moon or an officer once you have donated. Each Pumpkin will be assigned a number when it is donated, starting at 1 and going up consecutively.</i>
+        <li>A special thank you to everyone who has helped made this raffle possible over the years, and to all of you who continue to support our guild with your time and help!</li>
+    </ul>
+    <p class='text-center' style='padding-top: 6px;'>
+        <b>Good luck SANDies, and Happy Candy Day!</b>
+    </p>
+    <p class="text-center">🎃🎃🎃🎃🎃🎃🎃🎃🎃🎃</p>
+    
+    <!-- pumpkin -->
+    <div class='pumpkin-main'>
+    <div class="stalk"></div>
+    <div class="pumpkin">
+        <div class="stripesOutter">
+            <div class="stripesInner">
+                <div class="leftEye">
+                    <div class="eyeBall"></div>
+                </div>
+                <div class="leftEyeAngry"></div>
+                <div class="blushLeft"></div>
+                <div class="rightEye">
+                    <div class="eyeBall"></div>
+                </div>
+                <div class="rightEyeAngry"></div>
+                <div class="blushRight"></div>
+                <div class="mouth"></div>
+            </div>
+        </div>
+    </div>
+    <div class="shadow"></div>  
+    </div>
+</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+<script src='js/main.js'></script>
+<script src="js/members.js"></script>
+<script src="js/halloween.js"></script>
+
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-19228491-3', 'auto');
+  ga('send', 'pageview');
+  
+  /*$.fn.halloweenBats({
+    image: 'images/bats.png', // Path to the image.
+    zIndex: -1, // The z-index you need.
+    amount: 10, // Bat amount.
+    width: 35, // Image width.
+    height: 20, // Animation frame height.
+    frames: 4, // Amount of animation frames.
+    speed: 10, // Higher value = faster.
+    flickering: 15, // Higher value = slower.
+    target: '.pumpkin-main' // Target element
+  });*/
+</script>
+</body>
+</html>
