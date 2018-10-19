@@ -1,5 +1,5 @@
 # DryTopSAND
-[![Code Climate](https://codeclimate.com/github/DryTopSAND/SAND/badges/gpa.svg)](https://codeclimate.com/github/DryTopSAND/SAND)     
+
 A guild site for the Guild Wars 2 guild [SAND] - That's No Tornado
 
 :tada:
