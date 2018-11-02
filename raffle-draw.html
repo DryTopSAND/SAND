@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/raffle/raffle-draw.css">
     <link rel="stylesheet" href="css/raffle/watable.css">
     <link rel="stylesheet" href="css/sweetalert2.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="js/raffle/WATable/jquery.watable.js"></script>
     <script src="https://momentjs.com/downloads/moment.min.js"></script>
@@ -18,38 +18,42 @@
 </head>
 <body>
 <script>
-    var itemId = 72271;		// pumpkin id
-    var users = {};
-    var minUsers = {};
-    var participants = {};
     var logItems = {};
+    var participants = {};
     var tickets = [];
     var audio;
+    var itemId = 72271;     // pumpkin id
     $(function() {
 
         // fetch the transaction history from a remote server
         $.getJSON("http://167.114.130.199/SAND/log.json", function(log) {
 
-            logItems = sort(log);
+            logItems = log;
             refreshUsers();
         });
 
-        $('#min').change(refreshUsers);
-        $('#add').change(refreshTickets);
         $('#users').change(updateUsers);
     });
 
     /**
-     * Gets the list of participants into the raffle,
-     * the users who have deposited the minimum # of items
+     * Rebuilds the list of participants
+     * Using the information from the 'Minimum to enter' input box
+     */
+    function refreshUsers() {
+
+        // populate the participants list
+        users = getUsers(logItems);
+        populateUsers(users);
+
+        refreshTickets();
+    }
+
+    /**
+     * Gets the list of participants into the raffle
      * @param {Array} logItems The log history of deposits for the raffle item
-     * @param {int} minEntry The minimum # of items that must be deposited for entry into raffle
-     * @param {int} itemId The GW2 ID of the raffle item
      * @return {Object} A mapping of user => # items
      */
-    function getMinUsers(logItems, minEntry, itemId) {
-
-        sort(logItems);
+    function getUsers(logItems) {
 
         // get all users who have contributed the item
         var users = {};
@@ -62,22 +66,15 @@
                     users[user] = 1;
             }
         });
-
-        // filter to those who have contributed the minimum # of entries
-        var minUsers = {};
-        for (var user in users) {
-            if (users[user] >= minEntry)
-                minUsers[user] = users[user];
-        }
-
+        
+        //users = prune(users);
         sort(logItems);
-
-        return minUsers;
+        
+        return users;
     }
 
     /**
      * Populates the participants select box
-     * @param {Object} users mapping of username => # of entries
      */
     function populateUsers(users) {
 
@@ -85,15 +82,25 @@
 
         // clear existing options
         $('#users').find('option').remove();
-
-        for (var user in users) {
+        
+        // show the participants list sorted in alphabetical order
+        var sorted = [];
+        for (var user in users)
+            sorted.push(user);
+        sorted.sort(function (a, b) {
+            return a.toLowerCase().localeCompare(b.toLowerCase());
+        });
+        
+        for (var user in sorted) {
             $('#users').append($('<option>', {
-                value: user,
-                text: user,
+                value: sorted[user],
+                text: sorted[user],
                 selected: 1
             }));
-            participants[user] = users[user];
+            participants[sorted[user]] = sorted[user];
         }
+        
+        $('#numParts').html(Object.keys(participants).length);
     }
 
     /**
@@ -103,28 +110,10 @@
     function refreshTickets() {
 
         // get the list of raffle tickets
-        var minEntry = $('#min').val();
-        var addEntry = $('#add').val();
-        tickets = getTickets(logItems, itemId, minEntry, addEntry, participants);
+        tickets = getTickets(logItems, participants);
 
         // build the list of ordered raffle tickets
         buildTickets(tickets);
-    }
-
-    /**
-     * Rebuilds the list of participants
-     * Using the information from the 'Minimum to enter' input box
-     */
-    function refreshUsers() {
-
-        // get list of participants with minimum # of entries
-        var minEntry = $('#min').val();
-        minUsers = getMinUsers(logItems, minEntry, itemId);
-
-        // populate the participants list
-        populateUsers(minUsers);
-
-        refreshTickets();
     }
 
     /**
@@ -139,41 +128,28 @@
             participants[user] = users[user];
         });
 
+        $('#numParts').html(Object.keys(participants).length);
+
         refreshTickets();
     }
 
     /**
      * Calculates an ordered list of ticket #s
      * @param {Array} logItems the list of log items to evalulate for tickets
-     * @param {int} itemId the id of the raffle item
-     * @param {int} minEntry the minimum # of items deposited to enter the raffle
-     * @param {int} addEntry additional raffle entries after minimum
      * @param {Object} participants the list of selected / active users in the raffle
      */
-    function getTickets(logItems, itemId, minEntry, addEntry, participants) {
+    function getTickets(logItems, participants) {
 
         // get all users who have contributed the item
         var users = {};
         var tickets = [];
         $.each(logItems, function(i, logItem) {
             if (logItem.type == 'upgrade' && logItem.action == 'completed' && logItem.item_id == itemId) {
+            
                 var user = logItem.user;
                 if (!(user in participants)) return;
-                if (user in users)
-                    users[user]++;
-                else
-                    users[user] = 1;
-
-                // does this constitute a raffle ticket?
-                if (users[user] == minEntry)
-                    tickets.push(logItem);
-
-                if (users[user] > minEntry)
-                {
-                    var numAfter = users[user] - minEntry;
-                    if (numAfter % addEntry == 0)
-                        tickets.push(logItem);
-                }
+                
+                tickets.push(logItem);
             }
         });
         return tickets;
@@ -236,12 +212,24 @@
 
     /**
      * Reverses the log from descending to ascending
-	 * @param {Array} log the logged items to sort
+     * @param {Array} log the logged items to sort
      */
     function sort(log) {
+    
         // items are listed newest entries first by default
         // reverse so that oldest entries are first
         return log.reverse();
+    }
+    
+    function prune(users)
+    {
+        var newUsers = {};
+        
+        $.each(users, function(idx, val) {
+            if (val >= perTicket)
+                newUsers[idx] = val;
+        });
+        return newUsers;
     }
 
     /**
@@ -274,7 +262,7 @@
             onOpen: function() {
                 startFireworks();
                 $('ul.pagination').hide();
-                $('#fireworks').show();
+                $('#canvas').show();
                 setTimeout(function() {
                     audio = new Audio('audio/winner.m4a');
                     audio.play();
@@ -283,7 +271,7 @@
             onClose: function() {
                 stopFireworks();
                 $('ul.pagination').show();
-                $('#fireworks').hide();
+                $('#canvas').hide();
                 audio.pause();
             }
         });
@@ -302,12 +290,37 @@
 
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
+    
+    function getCoins(amount)
+    {
+        var gold = 0;
+        var silver = 0;
+        var copper = 0;
+        
+        if (amount >= 10000)
+        {
+            gold = Math.floor(amount / 10000);
+            amount = Math.floor(amount % 10000);
+        }
+        
+        if (amount >= 100)
+        {
+            silver = Math.floor(amount / 100);
+            amount = Math.floor(amount % 100);
+        }
+        
+        copper = amount;
+        
+        var coinStr = "";
+        if (gold > 0) coinStr += gold + "<img src=\"../images/gold-coin.png\" class=\"coin\">";
+        if (silver > 0) coinStr += silver + "<img src=\"../images/silver-coin.png\" class=\"coin\">";
+        if (copper > 0) coinStr += copper + "<img src=\"../images/copper-coin.png\" class=\"coin\">";
+        
+        return coinStr;
+    }
 </script>
 <h3>[SAND] Raffle Drawing</h3>
-<label for="min">Minimum to enter:</label><input type="text" value="10" id="min"><br>
-<label for="add">Additional entry per:</label><input type="text" value="2" id="add">
-<hr>
-<label for="users">Participants:</label>
+<label for="users">Participants (<span id="numParts"></span>):</label>
 <select multiple id="users"></select>
 <div id="log"></div>
 <hr>
