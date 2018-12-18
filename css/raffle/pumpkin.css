@@ -103,3 +103,24 @@ tfoot p
     padding-left: 4px;
     padding-right: 6px;
 }
+
+.small-icon
+{
+	width: 21px;
+	height: 21px;
+	margin-left: 10px;
+}
+
+#total .small-icon
+{
+	margin-left: 4px;
+    margin-right: 6px;
+
+	/*border: 1px solid #eee;*/
+	border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+#total
+{
+	line-height: 150%;
+}
