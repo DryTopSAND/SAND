@@ -78,3 +78,13 @@ ul {
 .raffle li {
   margin-bottom: 6px;
 }
+.raffle
+{
+  width: 960px;
+}
+.prizes img
+{
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
