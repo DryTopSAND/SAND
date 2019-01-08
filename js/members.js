@@ -18,7 +18,8 @@ var commonName = function(name) {
     'Arithmancer.5307': 'Dancira',
     'briana.3092': 'Kenwynna',
     'gmriggs.4628': 'L Cifarelli',
-    'El Quia.1397': 'Oriana Lai'
+    'El Quia.1397': 'Oriana Lai',
+	'llarryllamma.1046': 'Llarry Llamma'
   };
 
   return accounts[name] ? accounts[name] : '';
