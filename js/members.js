@@ -19,7 +19,8 @@ var commonName = function(name) {
     'briana.3092': 'Kenwynna',
     'gmriggs.4628': 'L Cifarelli',
     'El Quia.1397': 'Oriana Lai',
-	'llarryllamma.1046': 'Llarry Llamma'
+    'llarryllamma.1046': 'Llarry Llamma',
+    'Idyll.9371': 'Liria Korvos'
   };
 
   return accounts[name] ? accounts[name] : '';
