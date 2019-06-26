@@ -339,7 +339,7 @@ var ConfettiCannon = function () {
     }, {
         key: 'playSound',
         value: function playSound() {
-            var audio = new Audio('audio/birthday/blaster' + getRandomInt(1, 4) + '.mp3'); 
+            var audio = new Audio('/audio/birthday/blaster' + getRandomInt(1, 4) + '.mp3'); 
             audio.play();
        }
     }]);
