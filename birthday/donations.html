@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SAND - Birthday Donations</title>
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/raffle/pumpkin.css">
 <link rel="stylesheet" href="../css/raffle/watable.css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script src="../js/raffle/WATable/jquery.watable.js"></script>
 <script src="https://momentjs.com/downloads/moment.min.js"></script>
 </head>
@@ -20,7 +20,7 @@ var deposits = [];
 $(function() {
 
     // fetch the transaction history from a remote server
-    $.getJSON("http://167.114.130.199/SAND/birthday-log.json", function(logItems) {
+    $.getJSON("https://sand.guild-site.com/SAND/birthday-log.json", function(logItems) {
         
         // calculate totals
         $.each(logItems, function(i, logItem) {
