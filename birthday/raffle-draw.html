@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>[SAND] Birthday Raffle Drawing</title>
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/raffle/raffle-draw.css">
     <link rel="stylesheet" href="../css/raffle/watable.css">
     <link rel="stylesheet" href="../css/sweetalert2.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="../js/raffle/WATable/jquery.watable.js"></script>
     <script src="https://momentjs.com/downloads/moment.min.js"></script>
     <script src="../js/sweetalert2.min.js"></script>
@@ -22,11 +22,11 @@
     var participants = {};
     var tickets = [];
     var audio;
-    var perTicket = 200000;
+    var perTicket = 30000;
     $(function() {
 
         // fetch the transaction history from a remote server
-        $.getJSON("http://167.114.130.199/SAND/birthday-log.json", function(log) {
+        $.getJSON("https://sand.guild-site.com/SAND/birthday-log.json", function(log) {
 
             logItems = log;
             refreshUsers();
@@ -310,16 +310,25 @@
                 startFireworks();
                 $('ul.pagination').hide();
                 $('#canvas').show();
-                setTimeout(function() {
+                /*setTimeout(function() {
                     audio = new Audio('../audio/winner.m4a');
                     audio.play();
-                }, 250);
+                }, 250);*/
             },
             onClose: function() {
                 stopFireworks();
                 $('ul.pagination').show();
                 $('#canvas').hide();
-                audio.pause();
+                //audio.pause();
+				
+				// remove winner
+                $("#users > option").each(function() {
+                    if (winner.user == this.value)
+                    {
+                        $(this).prop('selected', false);
+                        updateUsers();
+                    }
+                });
             }
         });
     }
