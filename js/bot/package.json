@@ -1,0 +1,11 @@
+{
+    "name": "SAND-Bot",
+    "version": "1.0.0",
+    "description": "Guild Wars 2 - Dry Top Daily - Alert Notifications",
+    "main": "bot.js",
+    "author": "gmriggs",
+    "dependencies": {
+        "discord.js": "^11.5.1",
+        "moment": "^2.24.0"
+    }
+}
