@@ -59,7 +59,8 @@ $.get('https://api.guildwars2.com/v2/guild/' + guildId + '/members?access_token=
       case 'Dragon Champion':
       case 'Aspect Master':
       case 'Death God':
-        officers.push(member);
+        if (member.name != 'Cerie.2963')
+            officers.push(member);
         break;
       default:
         if (member.name === 'Arithmancer.5307') {
