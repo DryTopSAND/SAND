@@ -5,17 +5,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SAND - Wintersday Donations</title>
-<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/raffle/pumpkin.css">
 <link rel="stylesheet" href="../css/raffle/watable.css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script src="../js/raffle/WATable/jquery.watable.js"></script>
 <script src="https://momentjs.com/downloads/moment.min.js"></script>
-<style>
-    #total { font-size: 14px; }
-</style>
 </head>
 <body>
 <nav class='navbar navbar-inverse navbar-static-top'>
@@ -53,7 +49,7 @@
                            role='button'
                            aria-haspopup='true' aria-expanded='false'>Site Info <span class='caret'></span></a>
                         <ul class='dropdown-menu'>
-                            <li><a href='https://goo.gl/forms/6ndcBX7EYC'>Site Feedback</a></li>
+                            <li><a href='http://goo.gl/forms/6ndcBX7EYC'>Site Feedback</a></li>
                             <li><a href='https://github.com/DryTopSAND'>Contribute Updates</a></li>
                         </ul>
                     </li>
@@ -62,9 +58,14 @@
         </div> <!-- /.container-fluid -->
     </div>
 </nav>
+
+<canvas id="canvas" style="display:block;position:absolute;top:0;left:0;z-index:-1;"></canvas>
+
 <script>
 var users = {};
 var deposits = [];
+var id = 77629;     // snow pile id
+var id2 = 24317;    // glacial fragment id
 $(function() {
 
     // fetch the transaction history from a remote server
@@ -72,27 +73,45 @@ $(function() {
         
         // calculate totals
         $.each(logItems, function(i, logItem) {
-            if ((logItem.operation == 'deposit' || logItem.operation == 'withdraw') && logItem.coins != 0) {
-                
-                // exclude
-                var time = new Date(logItem.time);
-                if (time.getTime() <= 1575889258000) return;
-                
+            
+            var user = logItem.user;
+            
+            // snow piles
+            if (logItem.type == 'upgrade' && logItem.action == 'completed' && logItem.item_id == id)
+            {
                 deposits.push(logItem);
-                var user = logItem.user;
-                var coins = logItem.coins;
-                if (logItem.operation != 'deposit')
-                    coins *= -1;
+                
                 if (user in users)
-                    users[user] += coins;
+                    users[user]['upgrades']++;
                 else
-                    users[user] = coins;
+                {
+                    users[user] = {};
+                    users[user]['upgrades'] = 1;
+                    users[user]['deposits'] = 0;
+                }
+            }               
+            
+            // glacial fragments
+            if ((logItem.operation == 'deposit' || logItem.operation == 'withdraw') && logItem.item_id == id2) {
+
+                deposits.push(logItem);
+                var amount = logItem.count;
+                if (logItem.operation != 'deposit')
+                    amount *= -1;
+                if (user in users)
+                    users[user]['deposits'] += amount;
+                else
+                {
+                    users[user] = {};
+                    users[user]['upgrades'] = 0;
+                    users[user]['deposits'] = amount;
+                }
             }
         });
 
         var html = '';
         $.each(users, function(idx, val) {
-            html += idx + ' = ' + getCoins(val) + '<br>';
+            html += idx + ' = ' + get_items(val) + '<br>';
         });
         $('#total').html(html);
         
@@ -109,23 +128,23 @@ $(function() {
                 type: 'number',
                 unique: true
             },
-            type: {
-                index: 4,
-                type: 'string',
-                unique: false
-            },
             user: {
                 index: 3,
                 type: 'string',
                 unique: false
             },
-            amount: {
+            type: {
+                index: 4,
+                type: 'string',
+                unique: false
+            },
+            item: {
                 index: 5,
                 type: 'string',
                 unique: false
             },
             time: {
-                index: 5,
+                index: 6,
                 type: 'string',
                 unique: false
             }           
@@ -135,13 +154,22 @@ $(function() {
         for (var i = 0; i < deposits.length; i++)
         {
             var logItem = deposits[deposits.length - 1 - i];
-            var amount = logItem.coins;
+            var item = logItem.count;
+            var type = logItem.operation;
+            if (type == null)
+                type = 'upgrade';
+            if (type == 'upgrade')
+                item += snow_pile_icon;
+            else
+                item += fragment_icon;
+                
             var row = {
                 '#': i + 1,
                 id: logItem.id,
-                type: logItem.operation,
                 user: logItem.user,
-                amount: getCoins(amount),
+                type: type,
+                item: item,
+                //amount: amount,
                 time: moment(logItem.time).format('MMM D YYYY hh:mm:ss a'),
                 'row-cls': 'tblrow'
             };
@@ -159,7 +187,7 @@ $(function() {
     });
 });
 
-function getCoins(amount)
+function get_coins(amount)
 {
     var gold = 0;
     var silver = 0;
@@ -186,9 +214,31 @@ function getCoins(amount)
     
     return coinStr;
 }
+
+var snow_pile_icon = "<img src=\"../images/snow-pile.png\" class=\"small-icon\">";
+var fragment_icon = "<img src=\"../images/glacial-fragment.png\" class=\"small-icon\">";
+
+function get_items(entry)
+{
+    var snow_piles = entry['upgrades'];
+    var fragments = entry['deposits'];
+    
+    var html = '';
+    
+    if (snow_piles != 0)
+        html += snow_piles + snow_pile_icon;
+        
+    if (fragments != 0)
+        html += fragments + fragment_icon;
+        
+    return html;
+}
+
 </script>
 <h3>[SAND] Wintersday Donations</h3>
 <div id="total"></div>
 <div id="log"></div>
+
+<script src='../js/snow/snowstorm-cursor.js'></script>
 </body>
 </html>
