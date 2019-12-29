@@ -81,6 +81,8 @@ $(function() {
 					// exclude
 					var time = new Date(logItem.time);
 					if (time.getTime() <= 1575889258000) return;
+
+					if (logItem.user == 'Tiny.6371') return;
 					
 					deposits.push(logItem);
 					var user = logItem.user;
@@ -92,6 +94,11 @@ $(function() {
 					else
 						users[user] = coins;
 				}
+			});
+			
+			$.each(users, function(user, amount) {
+				if (amount == 0)
+					delete users[user];
 			});
 
 			var html = '';
