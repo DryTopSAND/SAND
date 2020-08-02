@@ -13,6 +13,9 @@ $.get('https://api.guildwars2.com/v2/guild/239F7382-9E2F-E511-A5A9-AC162DAE5A05/
   });
 
   mostRecentMessage = messages[0];
+  
+  // temporary
+  mostRecentMessage = mostRecentMessage.replace('Here is a link to a survey you can fill out to help during our events - you are automatically entered into a 2k Gem raffle for doing so!: https://forms.gle/PAMxDXocKTkU5VJz6', '');
 
   //Replace the line breaks in the message response with break tags
   mostRecentMessage = mostRecentMessage.replace(/(?:\r\n|\r|\n)/g, '<br />');
