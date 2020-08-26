@@ -67,96 +67,108 @@ var users = {};
 var deposits = [];
 $(function() {
 
-    // fetch the transaction history from a remote server
-    $.getJSON("https://sand.guild-site.com/SAND/birthday-log.json", function(logItems) {
+    $.ajax({
+        // fetch the transaction history from a remote server
+        cache: false,
+        url: "https://sand.guild-site.com/SAND/birthday-log.json",
+        dataType: "json",
+        success: function(logItems) {
         
-        // calculate totals
-        $.each(logItems, function(i, logItem) {
-            if ((logItem.operation == 'deposit' || logItem.operation == 'withdraw') && logItem.coins != 0) {
-                
-                // exclude
-                var time = new Date(logItem.time);
-                if (time.getTime() < 1531291780000) return;
-                if (logItem.id == 398966) return;
-                
-                deposits.push(logItem);
-                var user = logItem.user;
-                var coins = logItem.coins;
-                if (logItem.operation != 'deposit')
-                    coins *= -1;
-                if (user in users)
-                    users[user] += coins;
-                else
-                    users[user] = coins;
-            }
-        });
+            // calculate totals
+            $.each(logItems, function(i, logItem) {
+                if ((logItem.operation == 'deposit' || logItem.operation == 'withdraw') && logItem.coins != 0) {
+                    
+                    // exclude
+                    var time = new Date(logItem.time);
+                    if (time.getTime() <= 1575889258000) return;
 
-        var html = '';
-        $.each(users, function(idx, val) {
-            html += idx + ' = ' + getCoins(val) + '<br>';
-        });
-        $('#total').html(html);
-        
-        // build the log table
-        var cols = {
-            '#': {
-                index: 1,
-                type: 'number',
-                unique: true,
-                sortOrder: 'desc'
-            },
-            id: {
-                index: 2,
-                type: 'number',
-                unique: true
-            },
-            type: {
-                index: 4,
-                type: 'string',
-                unique: false
-            },
-            user: {
-                index: 3,
-                type: 'string',
-                unique: false
-            },
-            amount: {
-                index: 5,
-                type: 'string',
-                unique: false
-            },
-            time: {
-                index: 5,
-                type: 'string',
-                unique: false
-            }           
-        };
-        // reformat data
-        var rows = [];
-        for (var i = 0; i < deposits.length; i++)
-        {
-            var logItem = deposits[deposits.length - 1 - i];
-            var amount = logItem.coins;
-            var row = {
-                '#': i + 1,
-                id: logItem.id,
-                type: logItem.operation,
-                user: logItem.user,
-                amount: getCoins(amount),
-                time: moment(logItem.time).format('MMM D YYYY hh:mm:ss a'),
-                'row-cls': 'tblrow'
-            };
+                    if (logItem.user == 'Tiny.6371') return;
+                    
+                    deposits.push(logItem);
+                    var user = logItem.user;
+                    var coins = logItem.coins;
+                    if (logItem.operation != 'deposit')
+                        coins *= -1;
+                    if (user in users)
+                        users[user] += coins;
+                    else
+                        users[user] = coins;
+                }
+            });
             
-            rows.push(row);
+            $.each(users, function(user, amount) {
+                if (amount == 0)
+                    delete users[user];
+            });
+
+            var html = '';
+            $.each(users, function(idx, val) {
+                if (val > 0)
+                    html += idx + ' = ' + getCoins(val) + '<br>';
+            });
+            $('#total').html(html);
+            
+            // build the log table
+            var cols = {
+                '#': {
+                    index: 1,
+                    type: 'number',
+                    unique: true,
+                    sortOrder: 'desc'
+                },
+                id: {
+                    index: 2,
+                    type: 'number',
+                    unique: true
+                },
+                type: {
+                    index: 4,
+                    type: 'string',
+                    unique: false
+                },
+                user: {
+                    index: 3,
+                    type: 'string',
+                    unique: false
+                },
+                amount: {
+                    index: 5,
+                    type: 'string',
+                    unique: false
+                },
+                time: {
+                    index: 5,
+                    type: 'string',
+                    unique: false
+                }           
+            };
+            // reformat data
+            var rows = [];
+            for (var i = 0; i < deposits.length; i++)
+            {
+                var logItem = deposits[deposits.length - 1 - i];
+                var amount = logItem.coins;
+                var row = {
+                    '#': i + 1,
+                    id: logItem.id,
+                    type: logItem.operation,
+                    user: logItem.user,
+                    amount: getCoins(amount),
+                    time: moment(logItem.time).format('MMM D YYYY hh:mm:ss a'),
+                    'row-cls': 'tblrow'
+                };
+                
+                rows.push(row);
+            }
+            var data = {
+                cols: cols,
+                rows: rows
+            };
+            $('#log').WATable({
+                data: data,
+                pageSize: 20
+            });
         }
-        var data = {
-            cols: cols,
-            rows: rows
-        };
-        $('#log').WATable({
-            data: data,
-            pageSize: 20
-        });
     });
 });
 
