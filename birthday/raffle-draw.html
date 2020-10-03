@@ -22,7 +22,7 @@
     var participants = {};
     var tickets = [];
     var audio;
-    var perTicket = 30000;
+    var perTicket = 10000;
     $(function() {
 
         // fetch the transaction history from a remote server
@@ -62,8 +62,7 @@
 
             // exclude
                 var time = new Date(logItem.time);
-                if (time.getTime() < 1531291780000) return;
-                if (logItem.id == 398966) return;
+                if (time.getTime() < 1599414944000) return;
 
                 var user = logItem.user;
                 var coins = logItem.coins;
@@ -160,8 +159,7 @@
                 var user = logItem.user;
                 if (!(user in participants)) return;
                 var time = new Date(logItem.time);
-                if (time.getTime() < 1531291780000) return;
-                if (logItem.id == 398966) return;
+                if (time.getTime() < 1599414944000) return;
 
                 var coins = logItem.coins;
                 if (logItem.operation != 'deposit')
@@ -180,8 +178,8 @@
                 var currTickets = Math.floor(users[user] / perTicket);
                 
                 // ticket cap
-                if (currTickets > 10)
-                    currTickets = 10;
+                //if (currTickets > 10)
+                    //currTickets = 10;
                 
                 if (currTickets > prevTickets)      // won't handle withdrawls correctly, but shouldn't affect most users
                 {
@@ -320,8 +318,8 @@
                 $('ul.pagination').show();
                 $('#canvas').hide();
                 //audio.pause();
-				
-				// remove winner
+                
+                // remove winner
                 $("#users > option").each(function() {
                     if (winner.user == this.value)
                     {
