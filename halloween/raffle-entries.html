@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAND - Halloween Raffle Entries</title>
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/raffle/pumpkin.css">
+<link rel="stylesheet" href="../css/raffle/watable.css">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="../js/raffle/WATable/jquery.watable.js"></script>
+<script src="https://momentjs.com/downloads/moment.min.js"></script>
+<style>
+    #total { font-size: 14px; }
+</style>
+</head>
+<body>
+<nav class='navbar navbar-inverse navbar-static-top'>
+    <div class='container'>
+        <div class='container-fluid'>
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class='navbar-header'>
+                <button type='button'
+                        class='navbar-toggle collapsed'
+                        data-toggle='collapse'
+                        data-target='#navbar-collapse-1'
+                        aria-expanded='false'>
+                    <span class='sr-only'>Toggle navigation</span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                </button>
+                <a class='navbar-brand' href='../index.html'>[SAND] That's No Tornado</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class='collapse navbar-collapse' id='navbar-collapse-1'>
+                <ul class='nav navbar-nav navbar-left'>
+                    <li><a href='../calendar.html'>Events</a></li>
+                    <li><a href='../social.html'>Social</a></li>
+                </ul>
+                <ul class='nav navbar-nav navbar-right'>
+                    <li><a href='../dry-top-guide.html'>New to Dry Top?</a></li>
+                    <li><a href='../about-us.html'>About the Guild</a></li>
+                    <li><a href='../leadership.html'>Guild Leadership</a></li>
+                    <li><a href='../recruitment.html'>Guild Recruitment</a></li>
+                    <li class='dropdown'>
+                        <a href='#' class='dropdown-toggle'
+                           data-toggle='dropdown'
+                           role='button'
+                           aria-haspopup='true' aria-expanded='false'>Site Info <span class='caret'></span></a>
+                        <ul class='dropdown-menu'>
+                            <li><a href='https://goo.gl/forms/6ndcBX7EYC'>Site Feedback</a></li>
+                            <li><a href='https://github.com/DryTopSAND'>Contribute Updates</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> <!-- /.navbar-collapse -->
+        </div> <!-- /.container-fluid -->
+    </div>
+</nav>
+<script>
+var users = {};
+var deposits = [];
+$(function() {
+
+    $.ajax({
+        // fetch the transaction history from a remote server
+        cache: false,
+        url: "https://sand.guild-site.com/SAND/halloween-log.json",
+        dataType: "json",
+        success: function(logItems) {
+        
+            // calculate totals
+            $.each(logItems, function(i, logItem) {
+                if ((logItem.operation == 'deposit' || logItem.operation == 'withdraw') && logItem.coins != 0) {
+                    
+                    // exclude
+                    var time = new Date(logItem.time);
+                    if (time.getTime() < 1603529548000) return;
+
+                    deposits.push(logItem);
+                    var user = logItem.user;
+                    var coins = logItem.coins;
+                    if (logItem.operation != 'deposit')
+                        coins *= -1;
+                    if (user in users)
+                        users[user] += coins;
+                    else
+                        users[user] = coins;
+                }
+            });
+            
+            $.each(users, function(user, amount) {
+                if (amount == 0)
+                    delete users[user];
+            });
+
+            var html = '';
+            $.each(users, function(idx, val) {
+                if (val > 0)
+                    html += idx + ' = ' + getCoins(val) + '<br>';
+            });
+            $('#total').html(html);
+            
+            // build the log table
+            var cols = {
+                '#': {
+                    index: 1,
+                    type: 'number',
+                    unique: true,
+                    sortOrder: 'desc'
+                },
+                id: {
+                    index: 2,
+                    type: 'number',
+                    unique: true
+                },
+                type: {
+                    index: 4,
+                    type: 'string',
+                    unique: false
+                },
+                user: {
+                    index: 3,
+                    type: 'string',
+                    unique: false
+                },
+                amount: {
+                    index: 5,
+                    type: 'string',
+                    unique: false
+                },
+                time: {
+                    index: 5,
+                    type: 'string',
+                    unique: false
+                }           
+            };
+            // reformat data
+            var rows = [];
+            for (var i = 0; i < deposits.length; i++)
+            {
+                var logItem = deposits[deposits.length - 1 - i];
+                var amount = logItem.coins;
+                var row = {
+                    '#': i + 1,
+                    id: logItem.id,
+                    type: logItem.operation,
+                    user: logItem.user,
+                    amount: getCoins(amount),
+                    time: moment(logItem.time).format('MMM D YYYY hh:mm:ss a'),
+                    'row-cls': 'tblrow'
+                };
+                
+                rows.push(row);
+            }
+            var data = {
+                cols: cols,
+                rows: rows
+            };
+            $('#log').WATable({
+                data: data,
+                pageSize: 20
+            });
+        }
+    });
+});
+
+function getCoins(amount)
+{
+    var gold = 0;
+    var silver = 0;
+    var copper = 0;
+    
+    if (amount >= 10000)
+    {
+        gold = Math.floor(amount / 10000);
+        amount = Math.floor(amount % 10000);
+    }
+    
+    if (amount >= 100)
+    {
+        silver = Math.floor(amount / 100);
+        amount = Math.floor(amount % 100);
+    }
+    
+    copper = amount;
+    
+    var coinStr = "";
+    if (gold > 0) coinStr += gold + "<img src=\"../images/gold-coin.png\" class=\"coin\">";
+    if (silver > 0) coinStr += silver + "<img src=\"../images/silver-coin.png\" class=\"coin\">";
+    if (copper > 0) coinStr += copper + "<img src=\"../images/copper-coin.png\" class=\"coin\">";
+    
+    return coinStr;
+}
+</script>
+<h3>[SAND] Halloween Raffle Entries</h3>
+<div id="total"></div>
+<div id="log"></div>
+</body>
+</html>
