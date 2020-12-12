@@ -20,7 +20,8 @@ var commonName = function(name) {
     'gmriggs.4628': 'L Cifarelli',
     'El Quia.1397': 'Oriana Lai',
     'llarryllamma.1046': 'Llarry Llamma',
-    'Idyll.9371': 'Liria Korvos'
+    'Idyll.9371': 'Liria Korvos',
+    'thecaligarmo.1749': 'Câllì'
   };
 
   return accounts[name] ? accounts[name] : '';
