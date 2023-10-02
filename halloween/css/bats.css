@@ -15,6 +15,7 @@
 	height: 1.2em;
 	animation: 4s infinite alternate ease-in-out;
 	font-size: 6px;
+	opacity: 0;
 }
 
 	.bat, .bat *, .bat :before, .bat :after {
@@ -83,6 +84,7 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(0, 0);
+		opacity: 1;
 	}
 
 	20% {
@@ -104,6 +106,7 @@
 	100% {
 		transform: translate(-3vw, 0);
 		top: 49vh;
+		opacity: 1;
 	}
 }
 
@@ -118,6 +121,7 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(0, 0);
+		opacity: 1;
 	}
 
 	20% {
@@ -139,6 +143,7 @@
 	100% {
 		transform: translate(-9vw, 0);
 		top: 55vh;
+		opacity: 1;
 	}
 }
 
@@ -153,6 +158,7 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(0, 0);
+		opacity: 1;
 	}
 
 	20% {
@@ -174,6 +180,7 @@
 	100% {
 		transform: translate(-3vw, 0);
 		top: 47vh;
+		opacity: 1;
 	}
 }
 
@@ -188,6 +195,7 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(0, 0);
+		opacity: 1;
 	}
 
 	20% {
@@ -209,6 +217,7 @@
 	100% {
 		transform: translate(1vw, 0);
 		top: 25vh;
+		opacity: 1;
 	}
 }
 
@@ -223,6 +232,7 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(0, 0);
+		opacity: 1;
 	}
 
 	20% {
@@ -244,6 +254,7 @@
 	100% {
 		transform: translate(-7vw, 0);
 		top: 16vh;
+		opacity: 1;
 	}
 }
 
@@ -258,6 +269,7 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(0, 0);
+		opacity: 1;
 	}
 
 	20% {
@@ -279,6 +291,7 @@
 	100% {
 		transform: translate(7vw, 0);
 		top: 46vh;
+		opacity: 1;
 	}
 }
 
@@ -293,6 +306,7 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(0, 0);
+		opacity: 1;
 	}
 
 	20% {
@@ -314,6 +328,7 @@
 	100% {
 		transform: translate(-2vw, 0);
 		top: 49vh;
+		opacity: 1;
 	}
 }
 
@@ -328,6 +343,7 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(0, 0);
+		opacity: 1;
 	}
 
 	20% {
@@ -349,6 +365,7 @@
 	100% {
 		transform: translate(-5vw, 0);
 		top: 17vh;
+		opacity: 1;
 	}
 }
 
@@ -363,6 +380,7 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(0, 0);
+		opacity: 1;
 	}
 
 	20% {
@@ -384,6 +402,7 @@
 	100% {
 		transform: translate(3vw, 0);
 		top: 41vh;
+		opacity: 1;
 	}
 }
 
@@ -398,6 +417,7 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(0, 0);
+		opacity: 1;
 	}
 
 	20% {
@@ -419,6 +439,7 @@
 	100% {
 		transform: translate(0vw, 0);
 		top: 53vh;
+		opacity: 1;
 	}
 }
 
