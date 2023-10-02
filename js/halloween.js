@@ -4,7 +4,7 @@
     $.fn.halloweenBats = function (options) {
 
         var defaults = {
-            image: 'bats.png', // Path to the image.
+            image: '../bats.png', // Path to the image.
             zIndex: 10000, // The z-index you need.
             amount: 5, // Bat amount.
             width: 35, // Image width.
